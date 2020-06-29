@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
+import com.uxi.bambupaymerchant.MainActivity
 import com.uxi.bambupaymerchant.R
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -28,16 +29,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.btn_sign_in -> {
 //                viewModelLogin.subscribeLogin(input_email.text.toString(), input_password.text.toString())
-            }
-            R.id.btn_register -> {
-//                val intent = Intent(this, RegisterActivity::class.java)
-//                startActivity(intent)
-//                overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
             R.id.btn_forgot_password -> {
-//                val intent = Intent(this, ForgotPasswordActivity::class.java)
-//                startActivity(intent)
-//                overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                val intent = Intent(this, ForgotPasswordActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
             }
         }
     }
@@ -73,7 +72,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun events() {
         btn_sign_in.setOnClickListener(this)
-        btn_register.setOnClickListener(this)
         btn_forgot_password.setOnClickListener(this)
     }
 }

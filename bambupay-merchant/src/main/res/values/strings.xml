@@ -34,6 +34,8 @@
     <string name="card_cvv">CVV</string>
     <string name="agreement">I accept end-user license agreement.</string>
 
+    <string name="send">Send</string>
+
     <string name="skip">Skip</string>
     <string name="page1">Quick and easy</string>
     <string name="page2">Secure</string>
