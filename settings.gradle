@@ -1,0 +1,2 @@
+include ':bambupay-merchant'
+rootProject.name = "BambuPayMerchant"
