@@ -10,6 +10,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <string name="menu_home">Home</string>
+    <string name="menu_client_transfer">Client Fund Transfer</string>
+    <string name="menu_post_transfer">POS Fund Transfer</string>
+    <string name="menu_batch_transfer">Batch Fund Transfer</string>
+
     <string name="sign_in">Sign In</string>
     <string name="sign_in_details">Sign in to access\nyour account</string>
     <string name="email">Email address</string>
@@ -41,4 +46,28 @@
     <string name="page2">Secure</string>
     <string name="page3">Reliable</string>
     <string name="page_demo">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</string>
+
+    <string name="client_activity">Clients Activity</string>
+    <string name="view_all">View all</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="total_active">Total Active Clients</string>
+    <string name="total_available">Total Available Cards</string>
+
+    <string name="credit_transfer">Credit Transfer</string>
+    <string name="merchant_wallet_balance">Merchant Wallet Balance</string>
+    <string name="clients">Clients</string>
+    <string name="transact">Transfer Fund</string>
+    <string name="cancel">Cancel</string>
+    <string name="amount">Amount</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
 </resources>

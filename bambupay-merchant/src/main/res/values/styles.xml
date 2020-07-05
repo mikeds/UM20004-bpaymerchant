@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="drawerArrowStyle">@style/DrawerHamburgerStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,6 +17,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/black</item>
+        <item name="icon">@drawable/ic_drawer</item>
+    </style>
 
     <style name="TextViewSmall" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:textSize">12sp</item>
@@ -49,6 +56,12 @@
         <item name="android:ellipsize">end</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="TextViewTitle.SemiBold" parent="TextViewTitle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="TextViewSmallBody" parent="@android:style/TextAppearance.Widget.TextView">

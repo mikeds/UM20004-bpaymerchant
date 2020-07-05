@@ -2,10 +2,7 @@ package com.uxi.bambupaymerchant.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
-import com.uxi.bambupaymerchant.MainActivity
 import com.uxi.bambupaymerchant.R
 import kotlinx.android.synthetic.main.activity_login.*
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_client_fund_transfer"
+            android:title="@string/menu_client_transfer" />
+        <item
+            android:id="@+id/nav_pos_fund_transfer"
+            android:title="@string/menu_post_transfer" />
+        <item
+            android:id="@+id/nav_batch_fund_transfer"
+            android:title="@string/menu_batch_transfer" />
+    </group>
+</menu>

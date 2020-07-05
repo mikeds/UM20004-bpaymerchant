@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".fragment.POSFundFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextViewSmallBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/credit_transfer"
+            android:textColor="@color/green" />
+
+        <TextView
+            style="@style/TextViewSmall.SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/merchant_wallet_balance" />
+
+        <EditText
+            style="@style/TextViewSmall.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline"
+            android:gravity="center_vertical"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/black" />
+
+        <TextView
+            style="@style/TextViewSmall.SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/clients" />
+
+        <EditText
+            style="@style/TextViewSmall.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="15dp"
+            android:text=""
+            android:textColor="@color/black" />
+
+        <TextView
+            style="@style/TextViewSmall.SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/amount" />
+
+        <EditText
+            style="@style/TextViewSmall.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline"
+            android:gravity="center_vertical"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="15dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        <Button
+            android:id="@+id/btn_transact"
+            style="@style/TextViewSmallBody.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@drawable/bg_rounded_green"
+            android:text="@string/transact"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/TextViewSmallBody.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_rounded_white_border_green"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
