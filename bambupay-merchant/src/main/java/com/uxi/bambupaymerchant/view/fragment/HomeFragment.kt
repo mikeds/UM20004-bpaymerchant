@@ -1,4 +1,4 @@
-package com.uxi.bambupaymerchant.fragment
+package com.uxi.bambupaymerchant.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

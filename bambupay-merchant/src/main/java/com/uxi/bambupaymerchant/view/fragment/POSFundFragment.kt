@@ -1,12 +1,10 @@
-package com.uxi.bambupaymerchant.fragment
+package com.uxi.bambupaymerchant.view.fragment
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.uxi.bambupaymerchant.R
-import com.uxi.bambupaymerchant.activity.MainActivity
+import com.uxi.bambupaymerchant.view.activity.MainActivity
 import com.uxi.bambupaymerchant.ui.slideshow.POSFundViewModel
 
 class POSFundFragment : Fragment() {

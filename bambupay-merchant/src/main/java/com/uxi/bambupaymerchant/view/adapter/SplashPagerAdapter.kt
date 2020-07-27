@@ -1,4 +1,4 @@
-package com.uxi.bambupaymerchant
+package com.uxi.bambupaymerchant.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
+import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.model.Splash
 
 /**

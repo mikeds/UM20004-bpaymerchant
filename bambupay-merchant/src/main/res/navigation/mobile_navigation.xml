@@ -7,19 +7,38 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.uxi.bambupaymerchant.fragment.HomeFragment"
+        android:name="com.uxi.bambupaymerchant.view.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_client_fund_transfer"
-        android:name="com.uxi.bambupaymerchant.fragment.ClientFundFragment"
+        android:name="com.uxi.bambupaymerchant.view.fragment.ClientFundFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_client_fund" />
 
     <fragment
         android:id="@+id/nav_pos_fund_transfer"
-        android:name="com.uxi.bambupaymerchant.fragment.POSFundFragment"
+        android:name="com.uxi.bambupaymerchant.view.fragment.POSFundFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_pos_fund" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.uxi.bambupaymerchant.view.fragment.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <!--<fragment
+        android:id="@+id/nav_faq"
+        android:name="com.uxi.bambupaymerchant.view.slideshow.FAQFragment"
+        android:label="@string/menu_faq"
+        tools:layout="@layout/fragment_faq" />-->
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.uxi.bambupaymerchant.view.fragment.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_faq" />
+
 </navigation>

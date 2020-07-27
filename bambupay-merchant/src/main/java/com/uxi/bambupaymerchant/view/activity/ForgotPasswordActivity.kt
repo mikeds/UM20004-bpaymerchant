@@ -1,8 +1,9 @@
-package com.uxi.bambupaymerchant.activity
+package com.uxi.bambupaymerchant.view.activity
 
 import android.os.Bundle
 import android.view.MenuItem
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.view.activity.BaseActivity
 import kotlinx.android.synthetic.main.app_toolbar.*
 
 class ForgotPasswordActivity : BaseActivity() {

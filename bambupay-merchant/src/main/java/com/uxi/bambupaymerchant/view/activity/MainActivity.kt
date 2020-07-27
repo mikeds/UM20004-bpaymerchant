@@ -1,12 +1,14 @@
-package com.uxi.bambupaymerchant.activity
+package com.uxi.bambupaymerchant.view.activity
 
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -15,6 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.amulyakhare.textdrawable.TextDrawable
 import com.google.android.material.navigation.NavigationView
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.view.activity.BaseActivity
+import com.uxi.bambupaymerchant.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 
 
@@ -28,7 +32,7 @@ class MainActivity : BaseActivity() {
     private var nameTextView: TextView? = null
     private var mobileTextView: TextView? = null
 
-//    private val viewModelMain by viewModel<MainViewModel>()
+    private val viewModelMain by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +77,8 @@ class MainActivity : BaseActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home
+            R.id.nav_home,
+            R.id.nav_settings
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -87,7 +92,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun observeViewModel() {
-        /*viewModelMain.getCurrUser()
+        viewModelMain.getCurrUser()
 
         viewModelMain.initials.observe(this, Observer { initials ->
             initials?.let {
@@ -103,7 +108,7 @@ class MainActivity : BaseActivity() {
                         R.color.light_green
                     ))
 
-                profile_image?.setImageDrawable(initialDrawable)
+//                profile_image?.setImageDrawable(initialDrawable)
                 avatarImageView?.setImageDrawable(initialDrawable)
             }
         })
@@ -118,7 +123,7 @@ class MainActivity : BaseActivity() {
             mobileNumber?.let {
                 mobileTextView?.text = it
             }
-        })*/
+        })
     }
 
     fun updateToolbar(title: String?, color: Int) {

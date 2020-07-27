@@ -1,10 +1,10 @@
-package com.uxi.bambupaymerchant.activity
+package com.uxi.bambupaymerchant.view.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.uxi.bambupaymerchant.R
-import com.uxi.bambupaymerchant.SplashPagerAdapter
+import com.uxi.bambupaymerchant.view.adapter.SplashPagerAdapter
 import com.uxi.bambupaymerchant.model.Splash
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -36,7 +36,10 @@ class SplashActivity : AppCompatActivity() {
             Splash(R.drawable.img_page3, getString(R.string.page3), getString(R.string.page_demo))
         )
 
-        val adapter = SplashPagerAdapter(this@SplashActivity, images)
+        val adapter = SplashPagerAdapter(
+            this@SplashActivity,
+            images
+        )
         pager.adapter = adapter
         indicator.setViewPager(pager)
         indicator.isSnap = true
