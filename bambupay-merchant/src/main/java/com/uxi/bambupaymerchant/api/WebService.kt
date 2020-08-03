@@ -18,4 +18,13 @@ interface WebService {
     @POST("merchant/login")
     fun login(@Body params: Request): Flowable<GenericApiResponse<User>>
 
+    @POST("merchant/accept")
+    fun acceptSendMoney(@Body params: Request): Flowable<GenericApiResponse<Void>>
+
+    @POST("merchant/accept/cash-in")
+    fun acceptCashIn(@Body params: Request): Flowable<GenericApiResponse<Void>>
+
+    @POST("merchant/accept/cash-out")
+    fun acceptCashOut(@Body params: Request): Flowable<GenericApiResponse<Void>>
+
 }

@@ -14,6 +14,7 @@
             android:id="@+id/nav_pos_fund_transfer"
             android:title="@string/menu_post_transfer" />
         <item
+            android:visible="false"
             android:id="@+id/nav_batch_fund_transfer"
             android:title="@string/menu_batch_transfer" />
         <item

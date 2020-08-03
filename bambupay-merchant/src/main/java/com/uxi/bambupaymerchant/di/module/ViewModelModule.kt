@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.uxi.bambupay.di.factory.ViewModelKey
 import com.uxi.bambupaymerchant.di.factory.ViewModelFactory
-import com.uxi.bambupaymerchant.viewmodel.LoginViewModel
-import com.uxi.bambupaymerchant.viewmodel.MainViewModel
-import com.uxi.bambupaymerchant.viewmodel.SettingsViewModel
+import com.uxi.bambupaymerchant.viewmodel.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -34,10 +32,15 @@ abstract class ViewModelModule {
     @ViewModelKey(SettingsViewModel::class)
     internal abstract fun bindSettingsViewModel(settingsViewModel: SettingsViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(UserTokenViewModel::class)
-//    internal abstract fun bindUserTokenViewModel(userTokenViewModel: UserTokenViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(AcceptTransactionViewModel::class)
+    internal abstract fun bindAcceptTransactionViewModel(acceptTransactionViewModel: AcceptTransactionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserTokenViewModel::class)
+    internal abstract fun bindUserTokenViewModel(userTokenViewModel: UserTokenViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

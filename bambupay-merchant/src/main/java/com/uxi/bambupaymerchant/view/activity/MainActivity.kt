@@ -1,5 +1,6 @@
 package com.uxi.bambupaymerchant.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,6 +18,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.amulyakhare.textdrawable.TextDrawable
 import com.google.android.material.navigation.NavigationView
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.utils.Constants.Companion.CASH_IN
+import com.uxi.bambupaymerchant.utils.Constants.Companion.CASH_OUT
+import com.uxi.bambupaymerchant.utils.Constants.Companion.MODE_OF_TRANSACTION
+import com.uxi.bambupaymerchant.utils.Constants.Companion.SEND_MONEY
 import com.uxi.bambupaymerchant.view.activity.BaseActivity
 import com.uxi.bambupaymerchant.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.app_bar_main.view.*
@@ -88,6 +93,38 @@ class MainActivity : BaseActivity() {
         mobileTextView = headerView.findViewById(R.id.text_mobile_num)
         if (initialDrawable != null) {
             avatarImageView?.setImageDrawable(initialDrawable)
+        }
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.nav_client_fund_transfer -> {
+                    val intent = Intent(this@MainActivity, CashInActivity::class.java)
+                    intent.putExtra(MODE_OF_TRANSACTION, CASH_IN)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                    true
+                }
+                R.id.nav_pos_fund_transfer -> {
+                    val intent = Intent(this@MainActivity, CashInActivity::class.java)
+                    intent.putExtra(MODE_OF_TRANSACTION, CASH_OUT)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                    true
+                }
+                R.id.nav_batch_fund_transfer -> {
+                    val intent = Intent(this@MainActivity, CashInActivity::class.java)
+                    intent.putExtra(MODE_OF_TRANSACTION, SEND_MONEY)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                    true
+                }
+                R.id.nav_home -> {
+                    navController.navigate(R.id.nav_home)
+                    drawerLayout?.closeDrawer(GravityCompat.START)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

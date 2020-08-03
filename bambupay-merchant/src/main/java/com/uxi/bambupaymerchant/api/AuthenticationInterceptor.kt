@@ -24,7 +24,7 @@ class AuthenticationInterceptor
         val builder: Request.Builder
 
         if (BuildConfig.DEBUG) {
-            Timber.tag("DEBUG").e("TOKEN:: ${utils?.token}")
+            Log.e("DEBUG", "TOKEN:: ${utils?.token}")
             Log.e("DEBUG", "USER TOKEN:: ${utils?.userToken}")
         }
 
