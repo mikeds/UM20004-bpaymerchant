@@ -46,6 +46,8 @@
     <string name="house_no">House No. / Unit No. / Building</string>
     <string name="street">Street</string>
     <string name="barangay">Barangay</string>
+    <string name="file_upload">File Upload</string>
+    <string name="upload_docs">Upload Document Files</string>
 
     <string name="send">Send</string>
 

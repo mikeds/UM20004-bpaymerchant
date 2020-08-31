@@ -127,6 +127,11 @@ class MainActivity : BaseActivity() {
                     drawerLayout?.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.nav_settings -> {
+                    navController.navigate(R.id.nav_settings)
+                    drawerLayout?.closeDrawer(GravityCompat.START)
+                    true
+                }
                 else -> false
             }
         }

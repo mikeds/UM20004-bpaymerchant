@@ -52,9 +52,9 @@
                     android:id="@+id/btn_image_document"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:adjustViewBounds="true"
-                    android:layout_centerInParent="true"
                     android:background="@drawable/bg_img_preview"
                     android:scaleType="fitXY" />
 
@@ -266,6 +266,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords" />
+
+            <TextView
+                style="@style/TextViewSmall.SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:text="@string/file_upload" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_file_upload">
+
+                <TextView
+                    style="@style/TextViewTiny.Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableStart="@drawable/ic_upload"
+                    android:text="@string/upload_docs" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/ic_doc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/ic_file" />
+
+                <ImageView
+                    android:id="@+id/btn_remove"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_delete_green" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/ic_doc"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewSmall.Regular2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BusinessPermit.doc"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        style="@style/TextViewTiny.OpenSansRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="152 kb" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin" />
 
             <!-- Id Number -->
             <TextView
