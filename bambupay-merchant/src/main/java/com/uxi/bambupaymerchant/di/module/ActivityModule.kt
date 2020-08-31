@@ -1,9 +1,6 @@
 package com.uxi.bambupaymerchant.di.module
 
-import com.uxi.bambupaymerchant.view.activity.CashInActivity
-import com.uxi.bambupaymerchant.view.activity.LoginActivity
-import com.uxi.bambupaymerchant.view.activity.MainActivity
-import com.uxi.bambupaymerchant.view.activity.SplashActivity
+import com.uxi.bambupaymerchant.view.activity.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -20,6 +17,9 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector()
     internal abstract fun contributeLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun contributeRegisterActivity(): RegisterActivity
 
     @ContributesAndroidInjector(modules = [MainActivityFragmentModule::class])
     internal abstract fun contributeMainActivity(): MainActivity

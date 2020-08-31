@@ -32,6 +32,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 //                startActivity(intent)
 //                finish()
             }
+            R.id.btn_register -> {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+            }
             R.id.btn_forgot_password -> {
                 val intent = Intent(this, ForgotPasswordActivity::class.java)
                 startActivity(intent)
@@ -85,6 +90,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun events() {
         btn_sign_in.setOnClickListener(this)
+        btn_register.setOnClickListener(this)
         btn_forgot_password.setOnClickListener(this)
     }
 }
