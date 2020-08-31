@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "27450521042",
+    "firebase_url": "https://bambupay-um20004-merchant.firebaseio.com",
+    "project_id": "bambupay-um20004-merchant",
+    "storage_bucket": "bambupay-um20004-merchant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27450521042:android:67663595c5be114d89840b",
+        "android_client_info": {
+          "package_name": "com.uxi.bambupaymerchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27450521042-ucqa2vfha4i5eig9lbe7l249v8to8t9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFHCJd5wkDg6Vn513AM_YMQovFeAa04Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27450521042-ucqa2vfha4i5eig9lbe7l249v8to8t9b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
