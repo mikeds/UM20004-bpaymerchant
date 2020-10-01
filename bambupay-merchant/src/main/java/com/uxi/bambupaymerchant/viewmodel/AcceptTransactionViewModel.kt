@@ -31,7 +31,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
             .doOnSubscribe { loading.value = true }
             .doAfterTerminate { loading.value = false }
             .subscribe({
-                if (it.value != null) {
+                if (it.response != null) {
 
                 } else {
                     it.message?.let { error ->
@@ -67,7 +67,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
             .doOnSubscribe { loading.value = true }
             .doAfterTerminate { loading.value = false }
             .subscribe({
-                if (it.value != null) {
+                if (it.response != null) {
 
                 } else {
                     it.message?.let { error ->
@@ -103,7 +103,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
             .doOnSubscribe { loading.value = true }
             .doAfterTerminate { loading.value = false }
             .subscribe({
-                if (it.value != null) {
+                if (it.response != null) {
 
                 } else {
                     it.message?.let { error ->

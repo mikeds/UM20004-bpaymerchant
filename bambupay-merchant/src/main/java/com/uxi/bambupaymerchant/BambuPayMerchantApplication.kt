@@ -11,6 +11,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import timber.log.Timber
 
 /**
  * Created by Eraño Payawal on 7/27/20.
@@ -29,6 +30,9 @@ class BambuPayMerchantApplication : DaggerApplication() {
         instance = this
         appComponent.inject(this)
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
         initRealm()
         initStetho()
 

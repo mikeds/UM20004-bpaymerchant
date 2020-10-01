@@ -15,7 +15,7 @@ interface WebService {
     @POST("token")
     fun getToken(@Body map: HashMap<String, String>): Flowable<TokenResponse>
 
-    @POST("merchant/login")
+    @POST("merchants/login")
     fun login(@Body params: Request): Flowable<GenericApiResponse<User>>
 
     @POST("merchant/accept")

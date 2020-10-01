@@ -38,4 +38,20 @@ open class User : RealmObject() {
     @SerializedName("qr_code")
     var qrCode: String? = null
 
+    @SerializedName("merchant_name")
+    var merchantName: String? = null
+
+    @SerializedName("username")
+    var username: String? = null
+
+    @SerializedName("avatar_image")
+    var avatarImageUrl: String? = null
+
+    @SerializedName("account_status")
+    var accountStatus: String? = null
+
+    @SerializedName("email_status")
+    var emailStatus: String? = null
+
+
 }

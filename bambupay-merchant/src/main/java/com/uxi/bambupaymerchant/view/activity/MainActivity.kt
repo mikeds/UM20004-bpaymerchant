@@ -151,13 +151,18 @@ class MainActivity : BaseActivity() {
                     .toUpperCase()
                     .endConfig()
                     .buildRound(initials, ContextCompat.getColor(this,
-                        R.color.light_green
+                        R.color.green
                     ))
 
 //                profile_image?.setImageDrawable(initialDrawable)
                 avatarImageView?.setImageDrawable(initialDrawable)
             }
         })
+
+        viewModelMain.avatarUrl.observe(this, Observer {
+            loadImage(it, avatarImageView!!)
+        })
+
 
         viewModelMain.fullName.observe(this, Observer { fullName ->
             fullName?.let {
@@ -189,6 +194,7 @@ class MainActivity : BaseActivity() {
             .thumbnail(1.0f)
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .placeholder(initialDrawable)
             .into(imageView)
     }
 

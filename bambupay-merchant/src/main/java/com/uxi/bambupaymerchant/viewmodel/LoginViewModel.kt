@@ -1,6 +1,5 @@
 package com.uxi.bambupaymerchant.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.uxi.bambupaymerchant.api.Request
 import com.uxi.bambupaymerchant.repository.LoginRepository
@@ -23,7 +22,7 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
 
     fun subscribeToken() {
         // Log.e("DEBUG", "TOKEN=> ${utils.token}")
-        Log.e("DEBUG", "isTokenExpired=> ${utils.isTokenExpired}")
+        Timber.tag("DEBUG").e("isTokenExpired=> ${utils.isTokenExpired}")
 
         if (utils.token?.isNotEmpty()!! && !utils.isTokenExpired) return
 
@@ -47,7 +46,7 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
         if (isValidateCredentials(username, password)) {
 
             val encryptedPassword = utils.sha256(password)
-            Log.e("DEBUG", "encryptedPassword:: ${encryptedPassword.toLowerCase()}")
+            Timber.tag("DEBUG").e("encryptedPassword:: ${encryptedPassword.toLowerCase()}")
 
             val requestBuilder = Request.Builder()
                 .setUsername(username)
@@ -58,8 +57,8 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
                 .doAfterTerminate { loading.value = false }
                 .subscribe({
 
-                    if (it.value != null) {
-                        it.value?.let { user ->
+                    if (it.response != null) {
+                        it.response?.let { user ->
                             repository.saveUser(user)
                             utils.saveLoggedIn(true)
                             utils.saveUserKeyPack(user.secretKey, user.secretCode)
@@ -68,14 +67,14 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
                     } else {
                         it.message?.let { error ->
                             errorMessage.value = error
-                            Log.e("DEBUG", "error message:: $error")
+                            Timber.tag("DEBUG").e("error message:: $error")
                         }
                     }
 
                 }, {
                     Timber.e(it)
                     if (refreshToken(it)) {
-                        Log.e("DEBUG", "error refreshToken")
+                        Timber.tag("DEBUG").e("error refreshToken")
                         utils.saveTokenPack("", true)
                         isSuccessLoggedIn.value = false
                     }
@@ -87,7 +86,7 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
     }
 
     private fun isValidateCredentials(username: String?, password: String?) : Boolean {
-        if (username.isNullOrEmpty() || !utils.isEmailValid(username)) {
+        if (username.isNullOrEmpty()/* || !utils.isEmailValid(username)*/) {
             isEmailEmpty.value = true
             return false
         }

@@ -19,7 +19,7 @@ open class GenericApiResponse<T> {
     @SerializedName("message")
     var successMessage: String? = null
 
-    var value: T? = null
+    var response: T? = null
 
     companion object {
         fun <T> create(body: String): GenericApiResponse<T> {
