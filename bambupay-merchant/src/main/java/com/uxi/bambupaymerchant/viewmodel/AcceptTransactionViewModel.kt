@@ -25,7 +25,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
         }
 
         val requestBuilder = Request.Builder()
-            .setTransactionNumber(transactionNumber).build()
+            .setSenderRefId(transactionNumber).build()
 
         disposable?.add(repository.loadAcceptCashIn(requestBuilder)
             .doOnSubscribe { loading.value = true }
@@ -97,7 +97,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
         }
 
         val requestBuilder = Request.Builder()
-            .setTransactionNumber(transactionNumber).build()
+            .setSenderRefId(transactionNumber).build()
 
         disposable?.add(repository.loadAcceptSendMoney(requestBuilder)
             .doOnSubscribe { loading.value = true }
