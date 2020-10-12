@@ -41,4 +41,10 @@
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_faq" />
 
+    <fragment
+        android:id="@+id/nav_select_qr"
+        android:name="com.uxi.bambupaymerchant.view.fragment.SelectQrCodeFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_select_qr_code" />
+
 </navigation>

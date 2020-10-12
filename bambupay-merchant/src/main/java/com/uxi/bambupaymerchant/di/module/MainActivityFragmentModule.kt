@@ -1,6 +1,7 @@
 package com.uxi.bambupaymerchant.di.module
 
 import com.uxi.bambupaymerchant.view.fragment.HomeFragment
+import com.uxi.bambupaymerchant.view.fragment.SelectQrCodeFragment
 import com.uxi.bambupaymerchant.view.fragment.SettingsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -18,5 +19,8 @@ abstract class MainActivityFragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSelectQrCodeFragment(): SelectQrCodeFragment
 
 }

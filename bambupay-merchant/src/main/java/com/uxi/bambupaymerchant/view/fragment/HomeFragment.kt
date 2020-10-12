@@ -9,12 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.ui.home.HomeViewModel
+import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
+import timber.log.Timber
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    //    private lateinit var homeViewModel: HomeViewModel
+    private val userTokenModel by viewModel<UserTokenViewModel>()
 
-    override fun onCreateView(
+    /*override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,5 +30,13 @@ class HomeFragment : Fragment() {
 //            textView.text = it
         })
         return root
+    }*/
+
+    override fun getLayoutId() = R.layout.fragment_home
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userTokenModel.subscribeToken()
+        Timber.tag("DEBUG").e("subscribeToken")
     }
 }

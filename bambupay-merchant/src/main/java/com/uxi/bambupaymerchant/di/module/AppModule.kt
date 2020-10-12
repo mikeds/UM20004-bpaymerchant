@@ -46,17 +46,18 @@ class AppModule {
     @Provides
     fun provideOkHttpClient(interceptor: AuthenticationInterceptor): OkHttpClient {
         val httpClientBuilder = OkHttpClient.Builder()
+        httpClientBuilder.connectTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .connectionPool(ConnectionPool(3, 10, TimeUnit.MINUTES))
+            .addInterceptor(interceptor)
+
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY
             httpClientBuilder.networkInterceptors().add(logging)
         }
 
-        httpClientBuilder.connectTimeout(2, TimeUnit.MINUTES)
-            .writeTimeout(2, TimeUnit.MINUTES)
-            .readTimeout(2, TimeUnit.MINUTES)
-            .connectionPool(ConnectionPool(3, 10, TimeUnit.MINUTES))
-            .addInterceptor(interceptor)
         return httpClientBuilder.build()
     }
 

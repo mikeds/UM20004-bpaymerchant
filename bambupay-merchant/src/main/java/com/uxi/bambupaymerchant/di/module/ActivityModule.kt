@@ -30,4 +30,7 @@ abstract class ActivityModule {
     @ContributesAndroidInjector()
     internal abstract fun contributeForgotPasswordActivity(): ForgotPasswordActivity
 
+    @ContributesAndroidInjector()
+    internal abstract fun contributeScanPayQrCodeActivity(): ScanPayQrCodeActivity
+
 }

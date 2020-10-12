@@ -1,7 +1,9 @@
 package com.uxi.bambupaymerchant.view.activity
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -74,6 +76,16 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         builder.setMessage(message)
         builder.setPositiveButton(getString(R.string.action_okay), null)
         builder.create().show()
+    }
+
+    protected fun showMain() {
+        val handler = Handler()
+        handler.postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
+        }, 300)
     }
 
 }

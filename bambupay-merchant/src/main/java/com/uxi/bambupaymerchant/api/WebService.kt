@@ -1,5 +1,6 @@
 package com.uxi.bambupaymerchant.api
 
+import com.uxi.bambupaymerchant.model.ScanQr
 import com.uxi.bambupaymerchant.model.TokenResponse
 import com.uxi.bambupaymerchant.model.User
 import io.reactivex.Flowable
@@ -26,5 +27,8 @@ interface WebService {
 
     @POST("merchant/accept/cash-out")
     fun acceptCashOut(@Body params: Request): Flowable<GenericApiResponse<Void>>
+
+    @POST("transactions/merchant/createpayqr/accept")
+    fun acceptPayQr(@Body params: Request): Flowable<GenericApiResponse<ScanQr>>
 
 }

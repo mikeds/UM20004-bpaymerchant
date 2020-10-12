@@ -14,15 +14,18 @@
             android:id="@+id/nav_pos_fund_transfer"
             android:title="@string/menu_post_transfer" />
         <item
-            android:visible="false"
             android:id="@+id/nav_batch_fund_transfer"
-            android:title="@string/menu_batch_transfer" />
+            android:title="@string/menu_batch_transfer"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_select_qr"
+            android:title="@string/menu_qr_code" />
         <item
             android:id="@+id/nav_settings"
             android:title="@string/menu_settings" />
-<!--        <item-->
-<!--            android:id="@+id/nav_faq"-->
-<!--            android:title="@string/menu_faq" />-->
+        <!--        <item-->
+        <!--            android:id="@+id/nav_faq"-->
+        <!--            android:title="@string/menu_faq" />-->
         <item
             android:id="@+id/nav_about"
             android:title="@string/menu_about" />
