@@ -23,4 +23,10 @@ class QrCodeRepository @Inject constructor(private val webService: WebService) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun loadCreatePayQr(request: Request) : Flowable<GenericApiResponse<ScanQr>> {
+        return webService.createPayQr(request)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
 }

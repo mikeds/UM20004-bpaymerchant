@@ -31,4 +31,7 @@ interface WebService {
     @POST("transactions/merchant/createpayqr/accept")
     fun acceptPayQr(@Body params: Request): Flowable<GenericApiResponse<ScanQr>>
 
+    @POST("transactions/merchant/scanpayqr/create")
+    fun createPayQr(@Body params: Request): Flowable<GenericApiResponse<ScanQr>>
+
 }

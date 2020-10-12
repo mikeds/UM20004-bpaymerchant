@@ -136,8 +136,6 @@ class ScanPayQrCodeActivity : BaseActivity() {
                 }
 
                 override fun onNewClicked() {
-//                    EventBus.getDefault().post(NewTransactionEvent())
-//                    finish()
                     text_input_ref_num.setText("")
                 }
             })

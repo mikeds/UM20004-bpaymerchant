@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.view.activity.CreateQRActivity
 import com.uxi.bambupaymerchant.view.activity.ScanPayQrCodeActivity
 import kotlinx.android.synthetic.main.fragment_select_qr_code.*
 
@@ -27,7 +28,11 @@ class SelectQrCodeFragment : BaseFragment() {
         }
 
         btn_create_pay_qr.setOnClickListener {
-
+            activity?.let {
+                val intent = Intent(it, CreateQRActivity::class.java)
+                startActivity(intent)
+                it.overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+            }
         }
     }
 

@@ -116,6 +116,8 @@
     <string name="go_back_to_dashboard">Go to Dashboard</string>
     <string name="amount_value">₱ %s</string>
     <string name="date_time">Date / Time </string>
+    <string name="generate_qr">Generate QR Code</string>
+    <string name="clear">Clear</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

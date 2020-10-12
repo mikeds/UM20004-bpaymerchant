@@ -1,9 +1,12 @@
 package com.uxi.bambupaymerchant.view.activity
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -86,6 +89,11 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
             startActivity(intent)
             finish()
         }, 300)
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
 }
