@@ -109,8 +109,8 @@
     <string name="error">Error</string>
     <string name="error_transaction_number">Transaction number not found</string>
 
-    <string name="scan_pay">ScanPayQR</string>
-    <string name="create_qr">CreatePayQR</string>
+    <string name="scan_pay">ReceiveScanPayQR</string>
+    <string name="create_qr">ReceiveCreatePayQR</string>
     <string name="ref_num">Reference Number</string>
     <string name="make_new_transaction">New Transaction</string>
     <string name="go_back_to_dashboard">Go to Dashboard</string>

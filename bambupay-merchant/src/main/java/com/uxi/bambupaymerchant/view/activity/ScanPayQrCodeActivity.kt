@@ -84,25 +84,25 @@ class ScanPayQrCodeActivity : BaseActivity() {
     }
 
     private fun observeViewModel() {
-        qrCodeViewModel.isTransactionNumberEmpty.observe(this, { isTransactionNumberEmpty ->
-            if (isTransactionNumberEmpty) {
+        qrCodeViewModel.isTransactionNumberEmpty.observe(this, Observer {
+            if (it) {
                 showDialogMessage("Transaction Number Required")
             }
         })
 
-        qrCodeViewModel.successMessage.observe(this, { successMessage ->
+        qrCodeViewModel.successMessage.observe(this, Observer { successMessage ->
             if (!successMessage.isNullOrEmpty()) {
 //                alertMessage(successMessage)
             }
         })
 
-        qrCodeViewModel.errorMessage.observe(this, { failedMessage ->
+        qrCodeViewModel.errorMessage.observe(this, Observer { failedMessage ->
             if (!failedMessage.isNullOrEmpty()) {
                 showDialogMessage(failedMessage)
             }
         })
 
-        qrCodeViewModel.loading.observe(this, { isLoading ->
+        qrCodeViewModel.loading.observe(this, Observer { isLoading ->
             if (isLoading) {
                 showProgressDialog("Loading...")
             } else {
@@ -124,10 +124,10 @@ class ScanPayQrCodeActivity : BaseActivity() {
         })
 
         var message = ""
-        qrCodeViewModel.quickPaySuccessMsg.observe(this, { successMessage ->
+        qrCodeViewModel.quickPaySuccessMsg.observe(this, Observer { successMessage ->
             message = successMessage
         })
-        qrCodeViewModel.quickPayData.observe(this, {
+        qrCodeViewModel.quickPayData.observe(this, Observer {
             val successDialog =
                 SuccessDialog(this, message, "", "Oct 03, 2020 | 10:00PM", it.qrCode)
             successDialog.setOnSuccessDialogClickListener(object : SuccessDialog.OnSuccessDialogClickListener {
