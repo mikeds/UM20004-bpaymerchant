@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
     tools:context=".view.fragment.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<!--    <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+<!--        android:id="@+id/refresh_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:srlAccentColor="@color/colorPrimaryDark"-->
+<!--        app:srlEnableLoadmore="false"-->
+<!--        app:srlPrimaryColor="@color/colorPrimaryDark">-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -32,14 +35,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="118dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/_16sdp"
                         app:cardCornerRadius="4dp"
                         app:cardElevation="3dp"
                         app:cardUseCompatPadding="false">
@@ -105,65 +108,85 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
+                    android:orientation="vertical">
 
-                    <TextView
-                        style="@style/TextViewSmallBody"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:includeFontPadding="false"
-                        android:text="@string/client_activity" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/btn_view_all"
-                        style="@style/TextViewTiny"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/open_sans_regular"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="@string/view_all" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/_16sdp"
+                            android:paddingTop="@dimen/_8sdp"
+                            android:paddingEnd="@dimen/_16sdp"
+                            android:paddingBottom="@dimen/_8sdp">
 
-                </RelativeLayout>
+                            <TextView
+                                style="@style/TextViewSmallBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:includeFontPadding="false"
+                                android:text="@string/recent_transactions" />
 
-            </LinearLayout>
+                            <TextView
+                                android:id="@+id/btn_view_all"
+                                style="@style/TextViewTiny"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/open_sans_regular"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp"
+                                android:text="@string/view_all" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/div" />
+                        </RelativeLayout>
 
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
-            <include layout="@layout/item_transaction"/>
+                    </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_recent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/div" />
+
+                    <!--<include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />
+
+                    <include layout="@layout/item_transaction" />-->
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_recent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+<!--    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
 
-</RelativeLayout>
+</FrameLayout>

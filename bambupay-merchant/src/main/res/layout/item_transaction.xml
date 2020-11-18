@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_history_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
     android:padding="@dimen/activity_horizontal_margin">
 
     <LinearLayout
@@ -27,6 +30,17 @@
             android:text="March 25, 2020 |  12:30 pm" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_amount"
+        style="@style/TextViewSmall.Regular2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/img_arrow"
+        android:includeFontPadding="false"
+        android:text="-500"
+        android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/img_arrow"

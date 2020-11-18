@@ -1,42 +1,55 @@
 package com.uxi.bambupaymerchant.view.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.uxi.bambupaymerchant.R
-import com.uxi.bambupaymerchant.ui.home.HomeViewModel
+import com.uxi.bambupaymerchant.model.Transaction
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
-import timber.log.Timber
 
 class HomeFragment : BaseFragment() {
 
-    //    private lateinit var homeViewModel: HomeViewModel
     private val userTokenModel by viewModel<UserTokenViewModel>()
+//    private val historyViewModel by viewModels<HistoryViewModel> { viewModelFactory }
+//    private val historyViewModel by viewModel<HistoryViewModel>()
 
-    /*override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-        })
-        return root
-    }*/
+//    private lateinit var adapterRecent: RecentHistoryAdapter
 
     override fun getLayoutId() = R.layout.fragment_home
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initData() {
         userTokenModel.subscribeToken()
-        Timber.tag("DEBUG").e("subscribeToken")
+    }
+
+    override fun observeViewModel() {
+//        historyViewModel.getRecentHistory()
+        /*historyViewModel.recentHistory.observe(viewLifecycleOwner, adapterRecent::submitList)
+        historyViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                //shimmer_view_container.startShimmer()
+            } else {
+                //shimmer_view_container.stopShimmer()
+                refresh_layout.finishRefresh()
+                refresh_layout.finishLoadmore()
+            }
+        }*/
+//        historyViewModel.subscribeHistory(true)
+    }
+
+    override fun initView() {
+        /*adapterRecent = RecentHistoryAdapter(
+            activity = requireActivity(),
+            onHistoryItemClick = ::onHistoryItemClick
+        )*/
+
+        /*recycler_view_recent.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = adapterRecent
+        }*/
+
+//        refresh_layout.setOnRefreshListener {
+////            historyViewModel.subscribeHistory(true)
+//        }
+    }
+
+    private fun onHistoryItemClick(transaction: Transaction) {
+
     }
 }

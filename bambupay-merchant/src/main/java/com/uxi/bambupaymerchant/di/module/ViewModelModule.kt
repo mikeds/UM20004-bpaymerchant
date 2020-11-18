@@ -47,6 +47,11 @@ abstract class ViewModelModule {
     @ViewModelKey(QRCodeViewModel::class)
     internal abstract fun bindQRCodeViewModel(qrCodeViewModel: QRCodeViewModel): ViewModel
 
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(HistoryViewModel::class)
+//    internal abstract fun bindHistoryViewModel(historyViewModel: HistoryViewModel): ViewModel
+
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 

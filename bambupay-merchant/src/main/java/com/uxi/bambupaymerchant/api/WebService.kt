@@ -1,11 +1,11 @@
 package com.uxi.bambupaymerchant.api
 
-import com.uxi.bambupaymerchant.model.ScanQr
-import com.uxi.bambupaymerchant.model.TokenResponse
-import com.uxi.bambupaymerchant.model.User
+import com.uxi.bambupaymerchant.model.*
 import io.reactivex.Flowable
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 /**
  * Created by Eraño Payawal on 7/27/20.
@@ -33,5 +33,11 @@ interface WebService {
 
     @POST("transactions/merchant/scanpayqr/create")
     fun createPayQr(@Body params: Request): Flowable<GenericApiResponse<ScanQr>>
+
+    @GET("merchants/balance")
+    fun balance(): Flowable<GenericApiResponse<Balance>>
+
+    @GET("clients/transactions/{transactionId}")
+    fun history(@Path("transactionId") transactionId: String?): Flowable<GenericApiResponse<Transactions>>
 
 }

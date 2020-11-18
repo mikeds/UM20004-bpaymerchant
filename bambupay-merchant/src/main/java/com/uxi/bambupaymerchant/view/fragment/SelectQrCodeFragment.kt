@@ -1,8 +1,6 @@
 package com.uxi.bambupaymerchant.view.fragment
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.view.activity.CreateQRActivity
 import com.uxi.bambupaymerchant.view.activity.ScanPayQrCodeActivity
@@ -16,9 +14,15 @@ class SelectQrCodeFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_select_qr_code
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initData() {
 
+    }
+
+    override fun observeViewModel() {
+
+    }
+
+    override fun initView() {
         btn_scan_pay_qr.setOnClickListener {
             activity?.let {
                 val intent = Intent(it, ScanPayQrCodeActivity::class.java)
@@ -35,5 +39,4 @@ class SelectQrCodeFragment : BaseFragment() {
             }
         }
     }
-
 }

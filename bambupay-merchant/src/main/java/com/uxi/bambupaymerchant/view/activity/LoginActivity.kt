@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         events()
     }
 
-    override fun getLayoutId() = R.layout.activity_login
+    override fun getLayoutId() = R.layout.test
 
     override fun onClick(v: View?) {
         when (v?.id) {

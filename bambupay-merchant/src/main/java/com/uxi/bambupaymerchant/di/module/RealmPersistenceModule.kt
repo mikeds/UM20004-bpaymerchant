@@ -25,4 +25,10 @@ class RealmPersistenceModule {
         return UserDao(realm)
     }
 
+//    @Provides
+//    @Singleton
+//    fun provideHistoryDao(realm: Realm): HistoryDao {
+//        return HistoryDao(realm)
+//    }
+
 }
