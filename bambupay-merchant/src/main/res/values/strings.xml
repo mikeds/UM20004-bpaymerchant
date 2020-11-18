@@ -119,6 +119,11 @@
     <string name="generate_qr">Generate QR Code</string>
     <string name="clear">Clear</string>
 
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="create_scan_qr">CreateScanQR</string>
+    <string name="quick_qr">QuickPayQR</string>
+    <string name="ph_currency">₱ %s</string>
+
     <string-array name="gender_choice_array">
         <item>Male</item>
         <item>Female</item>

@@ -1,6 +1,7 @@
 package com.uxi.bambupaymerchant.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.uxi.bambupaymerchant.repository.UserTokenRepository
 import com.uxi.bambupaymerchant.utils.Utils
@@ -14,7 +15,8 @@ import javax.inject.Inject
 class UserTokenViewModel @Inject
 constructor(private val repository: UserTokenRepository, private val utils: Utils) : BaseViewModel() {
 
-    val isTokenRefresh = MutableLiveData<Boolean>()
+    private val _isTokenRefresh = MutableLiveData<Boolean>()
+    val isTokenRefresh: LiveData<Boolean> = _isTokenRefresh
 
     fun subscribeToken() {
 
@@ -27,7 +29,7 @@ constructor(private val repository: UserTokenRepository, private val utils: Util
             .subscribe({
                 it.let { token ->
                     utils.saveUserTokenPack(token.accessToken, false)
-                    isTokenRefresh.value = true
+                    _isTokenRefresh.value = true
                 }
             }, {
                 Log.e("DEBUG", "error token")

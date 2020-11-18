@@ -2,8 +2,6 @@ package com.uxi.bambupaymerchant.view.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.view.activity.LoginActivity
@@ -16,9 +14,15 @@ class SettingsFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_settings
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initData() {
 
+    }
+
+    override fun observeViewModel() {
+
+    }
+
+    override fun initView() {
         btn_logout.setOnClickListener {
             showLogoutDialog()
         }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.uxi.bambupaymerchant.view.fragment.HomeFragment"
+        android:name="com.uxi.bambupaymerchant.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 

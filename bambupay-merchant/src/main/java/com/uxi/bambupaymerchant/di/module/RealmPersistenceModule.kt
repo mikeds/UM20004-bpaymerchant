@@ -1,5 +1,6 @@
 package com.uxi.bambupaymerchant.di.module
 
+import com.uxi.bambupaymerchant.db.HistoryDao
 import com.uxi.bambupaymerchant.db.UserDao
 import dagger.Module
 import dagger.Provides
@@ -23,6 +24,12 @@ class RealmPersistenceModule {
     @Singleton
     fun provideUserDao(realm: Realm): UserDao {
         return UserDao(realm)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(realm: Realm): HistoryDao {
+        return HistoryDao(realm)
     }
 
 }

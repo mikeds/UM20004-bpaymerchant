@@ -1,6 +1,6 @@
 package com.uxi.bambupaymerchant.di.module
 
-import com.uxi.bambupaymerchant.view.fragment.HomeFragment
+import com.uxi.bambupaymerchant.ui.home.HomeFragment
 import com.uxi.bambupaymerchant.view.fragment.SelectQrCodeFragment
 import com.uxi.bambupaymerchant.view.fragment.SettingsFragment
 import dagger.Module
