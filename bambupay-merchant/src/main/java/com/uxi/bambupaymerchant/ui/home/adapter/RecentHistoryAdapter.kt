@@ -14,6 +14,7 @@ import com.uxi.bambupaymerchant.utils.Constants.Companion.CASH_IN
 import com.uxi.bambupaymerchant.utils.Constants.Companion.CASH_OUT
 import com.uxi.bambupaymerchant.utils.Constants.Companion.CREATE_SCAN_QR
 import com.uxi.bambupaymerchant.utils.Constants.Companion.DEBIT
+import com.uxi.bambupaymerchant.utils.Constants.Companion.INCOME_SHARES
 import com.uxi.bambupaymerchant.utils.Constants.Companion.QUICK_PAY_QR
 import com.uxi.bambupaymerchant.utils.Constants.Companion.SCAN_PAY_QR
 import com.uxi.bambupaymerchant.utils.Constants.Companion.SEND_MONEY
@@ -66,6 +67,7 @@ class RecentHistoryAdapter(private val activity: FragmentActivity?,
                     SCAN_PAY_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.scan_pay)
                     CREATE_SCAN_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.create_scan_qr)
                     QUICK_PAY_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.quick_qr)
+                    INCOME_SHARES -> itemView.txt_transaction_type.text = activity?.getString(R.string.income_shares)
                 }
                 val transactionAmount = it.amount?.let { it1 -> utils?.currencyFormat(it1) }
                 itemView.txt_amount.text = activity?.getString(R.string.ph_currency, transactionAmount)

@@ -28,10 +28,16 @@ class HistoryDao(val realm: Realm) {
         }
     }
 
-    fun getGroups(): Flowable<List<Transaction>> {
+    fun getHistory(): Flowable<List<Transaction>> {
         return realm.where<Transaction>()
             .findAllAsync()
             .asFlowable()
             .map { it.unmanaged() }
+    }
+
+    fun getHistoryDetails(transactionId: String) : Transaction? {
+        return realm.where<Transaction>()
+            .equalTo(Transaction::id.name, transactionId)
+            .findFirst()
     }
 }

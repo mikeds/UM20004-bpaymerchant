@@ -1,5 +1,6 @@
-package com.uxi.bambupaymerchant.view.activity
+package com.uxi.bambupaymerchant.ui.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -8,9 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.model.Transaction
-import com.uxi.bambupaymerchant.ui.home.HistoryViewModel
 import com.uxi.bambupaymerchant.ui.home.adapter.RecentHistoryAdapter
 import com.uxi.bambupaymerchant.utils.makeVisibleOrGone
+import com.uxi.bambupaymerchant.view.activity.BaseActivity
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.app_toolbar.*
@@ -40,7 +41,7 @@ class TransactionHistoryActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 return true
@@ -115,6 +116,9 @@ class TransactionHistoryActivity : BaseActivity() {
     }
 
     private fun onHistoryItemClick(transaction: Transaction) {
-
+        val intent = Intent(this@TransactionHistoryActivity, TransactionDetailsActivity::class.java)
+        intent.putExtra("transactionId", transaction.id)
+        startActivity(intent)
+        overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
     }
 }

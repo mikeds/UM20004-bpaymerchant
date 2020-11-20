@@ -125,6 +125,19 @@
     <string name="quick_qr">QuickPayQR</string>
     <string name="ph_currency">₱ %s</string>
     <string name="transaction_history">Transaction History</string>
+    <string name="cash_out_details">Cash Out Details</string>
+    <string name="fee">Fee</string>
+    <string name="date">Date</string>
+    <string name="transaction_status">Status</string>
+    <string name="sender">Sender</string>
+    <string name="recipient">Recipient</string>
+    <string name="message">Message</string>
+    <string name="reference_id">Reference ID</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="income_shares">Income Shares</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

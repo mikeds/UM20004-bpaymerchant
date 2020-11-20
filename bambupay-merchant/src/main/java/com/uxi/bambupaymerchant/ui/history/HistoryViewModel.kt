@@ -1,4 +1,4 @@
-package com.uxi.bambupaymerchant.ui.home
+package com.uxi.bambupaymerchant.ui.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +22,9 @@ class HistoryViewModel @Inject constructor(
 
     private val _recentHistory = MutableLiveData<List<Transaction>>()
     val recentHistory: LiveData<List<Transaction>> = _recentHistory
+
+    private val _transactionData = MutableLiveData<Transaction>()
+    val transactionData: LiveData<Transaction> = _transactionData
 
 //    private var lastId: String = ""
     private var lastTransactionId: String = ""
@@ -84,6 +87,17 @@ class HistoryViewModel @Inject constructor(
                     _recentHistory.postValue(it)
                 }, Timber::e)
         )
+    }
+
+    fun subscribeTransactionId(transactionId: String?) {
+        if (transactionId.isNullOrEmpty()) return
+
+        val historyDetails = repository.loadHistoryDetails(transactionId)
+        _transactionData.value = historyDetails
+    }
+
+    fun formatAmount(amount: String) : String? {
+        return utils.currencyFormat(amount)
     }
 
 }

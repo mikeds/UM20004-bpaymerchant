@@ -1,5 +1,7 @@
 package com.uxi.bambupaymerchant.di.module
 
+import com.uxi.bambupaymerchant.ui.history.TransactionDetailsActivity
+import com.uxi.bambupaymerchant.ui.history.TransactionHistoryActivity
 import com.uxi.bambupaymerchant.view.activity.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -38,5 +40,8 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector()
     internal abstract fun contributeTransactionHistoryActivity(): TransactionHistoryActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun contributeTransactionDetailsActivity(): TransactionDetailsActivity
 
 }

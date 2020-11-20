@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.model.Transaction
+import com.uxi.bambupaymerchant.ui.history.HistoryViewModel
+import com.uxi.bambupaymerchant.ui.history.TransactionDetailsActivity
 import com.uxi.bambupaymerchant.ui.home.adapter.RecentHistoryAdapter
-import com.uxi.bambupaymerchant.view.activity.TransactionHistoryActivity
+import com.uxi.bambupaymerchant.ui.history.TransactionHistoryActivity
 import com.uxi.bambupaymerchant.view.fragment.BaseFragment
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -88,6 +90,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onHistoryItemClick(transaction: Transaction) {
-
+        val intent = Intent(requireActivity(), TransactionDetailsActivity::class.java)
+        intent.putExtra("transactionId", transaction.id)
+        startActivity(intent)
+        activity?.overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
     }
 }

@@ -47,6 +47,10 @@ class HistoryRepository @Inject constructor(
     }
 
     fun history(): Flowable<List<Transaction>> {
-        return historyDao.getGroups()
+        return historyDao.getHistory()
+    }
+
+    fun loadHistoryDetails(transactionId: String) : Transaction? {
+        return historyDao.getHistoryDetails(transactionId)
     }
 }

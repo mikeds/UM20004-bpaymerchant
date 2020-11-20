@@ -8,6 +8,7 @@ class Constants {
         const val SCAN_PAY_QR = "ScanPayQR"
         const val CREATE_SCAN_QR = "CreateScanQR"
         const val QUICK_PAY_QR = "QuickPayQR"
+        const val INCOME_SHARES = "Income Shares"
 
         const val PENDING = "pending"
         const val APPROVED = "approved"

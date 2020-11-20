@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.uxi.bambupay.di.factory.ViewModelKey
 import com.uxi.bambupaymerchant.di.factory.ViewModelFactory
-import com.uxi.bambupaymerchant.ui.home.HistoryViewModel
+import com.uxi.bambupaymerchant.ui.history.HistoryViewModel
 import com.uxi.bambupaymerchant.ui.home.HomeViewModel
 import com.uxi.bambupaymerchant.viewmodel.*
 import dagger.Binds
