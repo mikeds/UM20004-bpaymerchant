@@ -36,4 +36,7 @@ abstract class ActivityModule {
     @ContributesAndroidInjector()
     internal abstract fun contributeCreateQRActivity(): CreateQRActivity
 
+    @ContributesAndroidInjector()
+    internal abstract fun contributeTransactionHistoryActivity(): TransactionHistoryActivity
+
 }

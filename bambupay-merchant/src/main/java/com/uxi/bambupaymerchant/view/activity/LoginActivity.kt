@@ -18,8 +18,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
 
 //        Timber.tag("DEBUG").e("isLoggedIn:: ${utils?.isLoggedIn}")
-        observeViewModel()
-        events()
     }
 
     override fun getLayoutId() = R.layout.activity_login
@@ -45,7 +43,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun observeViewModel() {
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun observeViewModel() {
         viewModelLogin.subscribeToken()
 
         viewModelLogin.loading.observe(this, Observer { isLoading ->
@@ -88,7 +94,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         })
     }
 
-    private fun events() {
+    override fun events() {
         btn_sign_in.setOnClickListener(this)
         btn_register.setOnClickListener(this)
         btn_forgot_password.setOnClickListener(this)

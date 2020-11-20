@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.uxi.bambupay.di.factory.ViewModelKey
 import com.uxi.bambupaymerchant.di.factory.ViewModelFactory
 import com.uxi.bambupaymerchant.ui.home.HistoryViewModel
+import com.uxi.bambupaymerchant.ui.home.HomeViewModel
 import com.uxi.bambupaymerchant.viewmodel.*
 import dagger.Binds
 import dagger.Module
@@ -52,6 +53,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HistoryViewModel::class)
     internal abstract fun bindHistoryViewModel(historyViewModel: HistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    internal abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

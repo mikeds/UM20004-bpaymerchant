@@ -63,6 +63,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="total_active">Total Active Clients</string>
     <string name="total_available">Total Available Cards</string>
+    <string name="total_available_balance">Total Available Balance</string>
 
     <string name="credit_transfer">Credit Transfer</string>
     <string name="merchant_wallet_balance">Merchant Wallet Balance</string>
@@ -123,6 +124,7 @@
     <string name="create_scan_qr">CreateScanQR</string>
     <string name="quick_qr">QuickPayQR</string>
     <string name="ph_currency">₱ %s</string>
+    <string name="transaction_history">Transaction History</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

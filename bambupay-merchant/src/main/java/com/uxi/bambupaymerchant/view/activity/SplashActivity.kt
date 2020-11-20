@@ -2,11 +2,10 @@ package com.uxi.bambupaymerchant.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.uxi.bambupaymerchant.R
-import com.uxi.bambupaymerchant.view.adapter.SplashPagerAdapter
 import com.uxi.bambupaymerchant.model.Splash
 import com.uxi.bambupaymerchant.utils.Utils
+import com.uxi.bambupaymerchant.view.adapter.SplashPagerAdapter
 import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
@@ -21,8 +20,11 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_splash)
+    }
 
+    override fun getLayoutId() = R.layout.activity_splash
+
+    override fun initData() {
         utils?.let {
             if (it.isLoggedIn) {
                 val intent = Intent(this, MainActivity::class.java)
@@ -31,7 +33,9 @@ class SplashActivity : BaseActivity() {
                 finish()
             }
         }
+    }
 
+    override fun initView() {
         val images: ArrayList<Splash> = arrayListOf(
             Splash(R.drawable.img_page1, getString(R.string.page1), getString(R.string.page_demo)),
             Splash(R.drawable.img_page2, getString(R.string.page2), getString(R.string.page_demo)),
@@ -46,6 +50,13 @@ class SplashActivity : BaseActivity() {
         indicator.setViewPager(pager)
         indicator.isSnap = true
 
+    }
+
+    override fun observeViewModel() {
+
+    }
+
+    override fun events() {
         btn_skip.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -53,6 +64,4 @@ class SplashActivity : BaseActivity() {
             finish()
         }
     }
-
-    override fun getLayoutId() = R.layout.activity_splash
 }

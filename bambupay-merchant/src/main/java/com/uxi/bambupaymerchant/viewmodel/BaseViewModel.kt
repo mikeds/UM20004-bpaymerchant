@@ -1,6 +1,7 @@
 package com.uxi.bambupaymerchant.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uxi.bambupaymerchant.api.GenericApiResponse
@@ -12,13 +13,18 @@ import timber.log.Timber
  * Created by Eraño Payawal on 6/28/20.
  * hunterxer31@gmail.com
  */
-open class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     protected var disposable: CompositeDisposable? = null
     val error = MutableLiveData<Error>()
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>(false)
     val isSuccess = MutableLiveData<Boolean>()
+
+    protected val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+    protected val _refreshToken = MutableLiveData<Boolean>()
+    val refreshToken: LiveData<Boolean> = _refreshToken
 
     init {
         disposable = CompositeDisposable()

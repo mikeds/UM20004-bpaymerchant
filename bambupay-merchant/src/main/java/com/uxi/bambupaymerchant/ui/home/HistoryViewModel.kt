@@ -20,14 +20,8 @@ class HistoryViewModel @Inject constructor(
     private val utils: Utils
 ) : BaseViewModel() {
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
     private val _recentHistory = MutableLiveData<List<Transaction>>()
     val recentHistory: LiveData<List<Transaction>> = _recentHistory
-
-    private val _refreshToken = MutableLiveData<Boolean>()
-    val refreshToken: LiveData<Boolean> = _refreshToken
 
 //    private var lastId: String = ""
     private var lastTransactionId: String = ""
@@ -72,7 +66,19 @@ class HistoryViewModel @Inject constructor(
         disposable?.add(
             repository.history()
                 .map { list ->
-                    list.sortedBy { it.dateCreated }.take(10)
+                    list.sortedByDescending { it.dateCreated }.take(10)
+                }
+                .subscribe({
+                    _recentHistory.postValue(it)
+                }, Timber::e)
+        )
+    }
+
+    fun getHistory() {
+        disposable?.add(
+            repository.history()
+                .map { list ->
+                    list.sortedByDescending { it.dateCreated }
                 }
                 .subscribe({
                     _recentHistory.postValue(it)

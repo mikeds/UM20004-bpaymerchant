@@ -42,9 +42,17 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         setContentView(getLayoutId())
+        initData()
+        initView()
+        observeViewModel()
+        events()
     }
 
     abstract fun getLayoutId(): Int
+    abstract fun initData()
+    abstract fun initView()
+    abstract fun observeViewModel()
+    abstract fun events()
 
     protected open fun showProgressDialog(message: String?) {
         if (progressDialog == null) {

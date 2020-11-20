@@ -11,7 +11,6 @@ class ForgotPasswordActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupToolbar()
-        events()
     }
 
     override fun getLayoutId() = R.layout.activity_forgot_password
@@ -43,7 +42,19 @@ class ForgotPasswordActivity : BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
-    private fun events() {
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun observeViewModel() {
+
+    }
+
+    override fun events() {
 
     }
 }

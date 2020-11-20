@@ -1,9 +1,9 @@
 package com.uxi.bambupaymerchant.db
 
+import com.uxi.bambupaymerchant.model.Balance
 import com.uxi.bambupaymerchant.model.User
 import io.realm.Realm
-import io.realm.RealmResults
-import io.realm.Sort
+import io.realm.kotlin.where
 
 /**
  * Created by Eraño Payawal on 6/28/20.
@@ -31,13 +31,22 @@ class UserDao(val realm: Realm) {
         }
     }
 
-    /*fun insertOrUpdate(obj: Balance) {
+    fun copyOrUpdate(obj: Balance) {
         realm.executeTransaction { realm1 ->
+            realm1.copyToRealmOrUpdate(obj)
+        }
+    }
+
+    fun saveNewBalance(obj: Balance) {
+        realm.executeTransaction { realm1 ->
+            realm1.where<Balance>()
+                .findAll()
+                .deleteAllFromRealm()
             realm1.insertOrUpdate(obj)
         }
     }
 
-    fun deleteBalance() {
+    /*fun deleteBalance() {
         realm.executeTransaction {
             it.delete(Balance::class.java)
         }

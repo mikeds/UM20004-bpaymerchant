@@ -40,8 +40,13 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupToolbar()
-        observeViewModel()
-        events()
+    }
+
+    override fun initData() {
+
+    }
+
+    override fun initView() {
         setupMicroBlink()
     }
 
@@ -111,7 +116,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun events() {
+    override fun events() {
         //input_card_expiry.addTextChangedListener(CreditCardExpiryTextWatcher(input_card_expiry))
         btn_image_document.setOnClickListener {
             // use default UI for scanning documents
@@ -239,7 +244,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         datePickerDialog.show()
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         viewModelLogin.subscribeToken()
 
         /*registerViewModel.loading.observe(this, Observer { isLoading ->

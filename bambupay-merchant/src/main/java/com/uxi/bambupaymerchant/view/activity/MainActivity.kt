@@ -44,10 +44,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setupToolbar()
-        setupDrawerLayout()
-        observeViewModel()
     }
 
     override fun getLayoutId() = R.layout.activity_main
@@ -142,7 +138,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun observeViewModel() {
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+        setupToolbar()
+        setupDrawerLayout()
+    }
+
+    override fun events() {
+
+    }
+
+    override fun observeViewModel() {
         viewModelMain.getCurrUser()
 
         viewModelMain.initials.observe(this, Observer { initials ->

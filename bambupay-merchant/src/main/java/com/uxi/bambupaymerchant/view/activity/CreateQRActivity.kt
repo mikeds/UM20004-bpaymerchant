@@ -25,8 +25,14 @@ class CreateQRActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupToolbar()
-        events()
-        observeViewModel()
+    }
+
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+
     }
 
     override fun getLayoutId() = R.layout.activity_create_qrcode
@@ -58,7 +64,7 @@ class CreateQRActivity : BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
-    private fun events() {
+    override fun events() {
         btn_retry.setOnClickListener {
             text_input_amount.setText("")
             image_view_qr_code.setImageDrawable(null)
@@ -78,7 +84,7 @@ class CreateQRActivity : BaseActivity() {
         }
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         qrCodeViewModel.isAmountEmpty.observe(this, Observer {
             if (it) {
                 showDialogMessage("Amount Required")

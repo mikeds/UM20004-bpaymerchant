@@ -36,9 +36,6 @@ class CashInActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupToolbar()
-        initViews()
-        observeViewModel()
-        events()
     }
 
     override fun getLayoutId() = R.layout.activity_cash_in
@@ -100,7 +97,7 @@ class CashInActivity : BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
-    private fun initViews() {
+    override fun initView() {
         text_title_header.text = titleHeader()
     }
 
@@ -124,7 +121,11 @@ class CashInActivity : BaseActivity() {
         }
     }
 
-    private fun events() {
+    override fun initData() {
+
+    }
+
+    override fun events() {
         btn_scan_qr_code.setOnClickListener {
             cameraPermission()
         }
@@ -152,7 +153,7 @@ class CashInActivity : BaseActivity() {
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         cashInViewModel.isTransactionNumberEmpty.observe(this, Observer { isTransactionNumberEmpty ->
             if (isTransactionNumberEmpty) {
                 showDialogMessage("Transaction Number Required")

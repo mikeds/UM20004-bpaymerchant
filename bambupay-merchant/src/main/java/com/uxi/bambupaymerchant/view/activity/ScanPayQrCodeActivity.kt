@@ -27,11 +27,17 @@ class ScanPayQrCodeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupToolbar()
-        events()
-        observeViewModel()
     }
 
     override fun getLayoutId() = R.layout.activity_scan_pay_qr_code
+
+    override fun initData() {
+
+    }
+
+    override fun initView() {
+
+    }
 
     override fun finish() {
         super.finish()
@@ -71,7 +77,7 @@ class ScanPayQrCodeActivity : BaseActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
-    private fun events() {
+    override fun events() {
         btn_scan_qr_code.setOnClickListener {
             cameraPermission()
         }
@@ -83,7 +89,7 @@ class ScanPayQrCodeActivity : BaseActivity() {
         }
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         qrCodeViewModel.isTransactionNumberEmpty.observe(this, Observer {
             if (it) {
                 showDialogMessage("Transaction Number Required")
