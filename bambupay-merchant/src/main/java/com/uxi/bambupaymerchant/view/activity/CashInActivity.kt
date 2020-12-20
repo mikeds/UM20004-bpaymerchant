@@ -18,6 +18,12 @@ import com.uxi.bambupaymerchant.viewmodel.AcceptTransactionViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.content_cash_in.*
+import kotlinx.android.synthetic.main.content_cash_in.btn_cancel
+import kotlinx.android.synthetic.main.content_cash_in.btn_scan_qr_code
+import kotlinx.android.synthetic.main.content_cash_in.btn_transact
+import timber.log.Timber
+import java.util.ArrayList
+import java.util.HashMap
 
 
 /**
@@ -105,7 +111,8 @@ class CashInActivity : BaseActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showScanCode()
+//                showScanCode()
+                showSunmiCamera()
             }
         }
     }
@@ -117,6 +124,18 @@ class CashInActivity : BaseActivity() {
             Log.e("DEBUG", "qrCode:: $qrCode")
             qrCode?.let {
                 text_input_transact_num.setText(it)
+            }
+        } else if (requestCode == ScanPayQrCodeActivity.START_SCAN) {
+            val bundle = data?.extras
+            val result = bundle?.getSerializable("data") as ArrayList<HashMap<String, String>>?
+            result?.let {
+                if (it.size > 0) {
+                    val dataItem = it[0].getValue("VALUE")
+                    Timber.tag("DEBUG").e("dataItem:: $dataItem")
+                    if (!dataItem.isNullOrEmpty()) {
+                        text_input_transact_num.setText(dataItem)
+                    }
+                }
             }
         }
     }
@@ -143,7 +162,8 @@ class CashInActivity : BaseActivity() {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
         } else {
-            showScanCode()
+//            showScanCode()
+            showSunmiCamera()
         }
     }
 
@@ -151,6 +171,17 @@ class CashInActivity : BaseActivity() {
         val intent = Intent(this@CashInActivity, ScanCodeActivity::class.java)
         startActivityForResult(intent, SCAN_QR_CODE)
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+    }
+
+    private fun showSunmiCamera() {
+        val intent = Intent()
+        intent.action = "com.sunmi.scan"
+        intent.setPackage("com.sunmi.codescanner")
+        intent.setClassName(
+            "com.sunmi.sunmiqrcodescanner",
+            "com.sunmi.sunmiqrcodescanner.activity.ScanActivity"
+        )
+        startActivityForResult(intent, ScanPayQrCodeActivity.START_SCAN)
     }
 
     override fun observeViewModel() {

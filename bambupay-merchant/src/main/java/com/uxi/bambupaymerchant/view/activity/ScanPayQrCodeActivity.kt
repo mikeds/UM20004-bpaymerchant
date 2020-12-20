@@ -14,6 +14,8 @@ import com.uxi.bambupaymerchant.viewmodel.QRCodeViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.app_toolbar.*
 import kotlinx.android.synthetic.main.content_scan_pay_qr_code.*
+import timber.log.Timber
+import java.util.*
 
 /**
  * Created by Eraño Payawal on 10/12/20.
@@ -65,6 +67,18 @@ class ScanPayQrCodeActivity : BaseActivity() {
             Log.e("DEBUG", "qrCode:: $qrCode")
             qrCode?.let {
                 text_input_ref_num.setText(it)
+            }
+        } else if (requestCode == START_SCAN) {
+            val bundle = data?.extras
+            val result = bundle?.getSerializable("data") as ArrayList<HashMap<String, String>>?
+            result?.let {
+                if (it.size > 0) {
+                    val dataItem = it[0].getValue("VALUE")
+                    Timber.tag("DEBUG").e("dataItem:: $dataItem")
+                    if (!dataItem.isNullOrEmpty()) {
+                        text_input_ref_num.setText(dataItem)
+                    }
+                }
             }
         }
     }
@@ -136,7 +150,8 @@ class ScanPayQrCodeActivity : BaseActivity() {
         qrCodeViewModel.quickPayData.observe(this, Observer {
             val successDialog =
                 SuccessDialog(this, message, "", "Oct 03, 2020 | 10:00PM", it.qrCode)
-            successDialog.setOnSuccessDialogClickListener(object : SuccessDialog.OnSuccessDialogClickListener {
+            successDialog.setOnSuccessDialogClickListener(object :
+                SuccessDialog.OnSuccessDialogClickListener {
                 override fun onDashBoardClicked() {
                     showMain()
                 }
@@ -150,19 +165,46 @@ class ScanPayQrCodeActivity : BaseActivity() {
     }
 
     private fun cameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) !=
-            PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
                 arrayOf(Manifest.permission.CAMERA), ScanCodeActivity.CAMERA_REQUEST_CODE
             )
         } else {
-            showScanCode()
+//            showScanCode()
+            showSunmiCamera()
         }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == ScanCodeActivity.CAMERA_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                showScanCode()
+                showSunmiCamera()
+            }
+        }
+    }
+
+    private fun showSunmiCamera() {
+        val intent = Intent()
+        intent.action = "com.sunmi.scan"
+        intent.setPackage("com.sunmi.codescanner")
+        //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(
+            "com.sunmi.sunmiqrcodescanner",
+            "com.sunmi.sunmiqrcodescanner.activity.ScanActivity"
+        )
+        startActivityForResult(intent, START_SCAN)
     }
 
     private fun showScanCode() {
         val intent = Intent(this@ScanPayQrCodeActivity, ScanCodeActivity::class.java)
         startActivityForResult(intent, ScanCodeActivity.SCAN_QR_CODE)
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+    }
+
+    companion object {
+        const val START_SCAN = 0x0001
     }
 }
