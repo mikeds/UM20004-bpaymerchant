@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_220sdp"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_vertical"
@@ -19,12 +20,10 @@
         android:textColor="@color/colorPrimary" />
 
     <TextView
-        android:id="@+id/text_amount_lbl"
         style="@style/TextViewTiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/amount" />
 
@@ -34,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:layout_marginBottom="@dimen/_10sdp"
         android:text="00" />
 
@@ -57,10 +55,11 @@
 
     <ImageView
         android:id="@+id/image_view_qr_code"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_gravity="center"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_new_transaction"

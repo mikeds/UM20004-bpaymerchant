@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.uxi.bambupaymerchant.utils.Constants
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.CAMERA_REQUEST_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCANNED_QR_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCAN_QR_CODE
+import com.uxi.bambupaymerchant.view.fragment.dialog.SuccessDialog
 import com.uxi.bambupaymerchant.viewmodel.AcceptTransactionViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.app_toolbar.*
@@ -33,7 +35,7 @@ import java.util.HashMap
 class CashInActivity : BaseActivity() {
 
     private val userTokenModel by viewModel<UserTokenViewModel>()
-    private val cashInViewModel by viewModel<AcceptTransactionViewModel>()
+    private val cashInViewModel by viewModels<AcceptTransactionViewModel> { viewModelFactory }
 
     private val transactionType: String? by lazy {
         intent?.extras?.getString(Constants.MODE_OF_TRANSACTION)
@@ -191,11 +193,11 @@ class CashInActivity : BaseActivity() {
             }
         })
 
-        cashInViewModel.successMessage.observe(this, Observer { successMessage ->
+        /*cashInViewModel.successMessage.observe(this, Observer { successMessage ->
             if (!successMessage.isNullOrEmpty()) {
                 alertMessage(successMessage)
             }
-        })
+        })*/
 
         cashInViewModel.errorMessage.observe(this, Observer { failedMessage ->
             if (!failedMessage.isNullOrEmpty()) {
@@ -203,7 +205,7 @@ class CashInActivity : BaseActivity() {
             }
         })
 
-        cashInViewModel.loading.observe(this, Observer { isLoading ->
+        cashInViewModel.isLoading.observe(this, Observer { isLoading ->
             if (isLoading) {
                 showProgressDialog("Loading...")
             } else {
@@ -224,6 +226,32 @@ class CashInActivity : BaseActivity() {
             }
         })
 
+        cashInViewModel.cashInDataWithMessage.observe(this, Observer { it1 ->
+            it1?.let {
+                if (!it.first.isNullOrEmpty() && it.second != null) {
+                    val amount = it.second?.amount
+                    val dialog = SuccessDialog(
+                        ctx = this@CashInActivity,
+                        message = it.first,
+                        amount = amount,
+                        date = it.second?.timestamp,
+                        qrCodeUrl = null,
+                        onNewClicked = ::viewNewClick,
+                        onDashBoardClicked = ::viewDashboardClick
+                    )
+                    dialog.show()
+                }
+            }
+        })
+
+    }
+
+    private fun viewNewClick() {
+        text_input_transact_num.setText("")
+    }
+
+    private fun viewDashboardClick() {
+        showMain()
     }
 
     private fun alertMessage(message: String) {
@@ -237,12 +265,16 @@ class CashInActivity : BaseActivity() {
 
     private fun transaction() {
         if (!transactionType.isNullOrEmpty()) {
-            if (transactionType.equals(Constants.CASH_IN)) {
-                cashInViewModel.subscribeCashIn(text_input_transact_num.text.toString())
-            } else if (transactionType.equals(Constants.CASH_OUT)) {
-                cashInViewModel.subscribeCashOut(text_input_transact_num.text.toString())
-            } else if (transactionType.equals(Constants.SEND_MONEY)) {
-                cashInViewModel.subscribeSendMoney(text_input_transact_num.text.toString())
+            when {
+                transactionType.equals(Constants.CASH_IN) -> {
+                    cashInViewModel.subscribeCashIn(text_input_transact_num.text.toString())
+                }
+                transactionType.equals(Constants.CASH_OUT) -> {
+                    cashInViewModel.subscribeCashOut(text_input_transact_num.text.toString())
+                }
+                transactionType.equals(Constants.SEND_MONEY) -> {
+                    cashInViewModel.subscribeSendMoney(text_input_transact_num.text.toString())
+                }
             }
         }
     }

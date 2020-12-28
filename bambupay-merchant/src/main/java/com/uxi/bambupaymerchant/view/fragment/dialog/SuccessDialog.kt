@@ -20,9 +20,9 @@ class SuccessDialog(
     private val message: String?,
     private val amount: String?,
     private val date: String?,
-    private val qrCodeUrl: String?) : Dialog(ctx) {
-
-    private lateinit var clickListener: OnSuccessDialogClickListener
+    private val qrCodeUrl: String?,
+    private val onNewClicked: () -> Unit,
+    private val onDashBoardClicked: () -> Unit) : Dialog(ctx) {
 
     init {
         setCancelable(false)
@@ -41,11 +41,7 @@ class SuccessDialog(
         }
 
         amount?.let {
-            if (it.isNotEmpty()) {
-                text_amount_lbl.visibility = View.VISIBLE
-                text_amount.visibility = View.VISIBLE
-                text_amount.text = ctx.getString(R.string.amount_value, it)
-            }
+            text_amount.text = ctx.getString(R.string.amount_value, it)
         }
 
         date?.let {
@@ -58,17 +54,13 @@ class SuccessDialog(
         }
 
         btn_new_transaction.setOnClickListener {
-            if (this::clickListener.isInitialized) {
-                dismiss()
-                clickListener.onNewClicked()
-            }
+            dismiss()
+            onNewClicked()
         }
 
         btn_okay.setOnClickListener {
-            if (this::clickListener.isInitialized) {
-                dismiss()
-                clickListener.onDashBoardClicked()
-            }
+            dismiss()
+            onDashBoardClicked()
         }
     }
 
@@ -79,15 +71,6 @@ class SuccessDialog(
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(imageView)
-    }
-
-    interface OnSuccessDialogClickListener {
-        fun onDashBoardClicked()
-        fun onNewClicked()
-    }
-
-    fun setOnSuccessDialogClickListener(listener: OnSuccessDialogClickListener) {
-        clickListener = listener
     }
 
 }

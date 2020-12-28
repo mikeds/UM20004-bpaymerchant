@@ -148,20 +148,25 @@ class ScanPayQrCodeActivity : BaseActivity() {
             message = successMessage
         })
         qrCodeViewModel.quickPayData.observe(this, Observer {
-            val successDialog =
-                SuccessDialog(this, message, "", "Oct 03, 2020 | 10:00PM", it.qrCode)
-            successDialog.setOnSuccessDialogClickListener(object :
-                SuccessDialog.OnSuccessDialogClickListener {
-                override fun onDashBoardClicked() {
-                    showMain()
-                }
-
-                override fun onNewClicked() {
-                    text_input_ref_num.setText("")
-                }
-            })
-            successDialog.show()
+            val dialog = SuccessDialog(
+                ctx = this@ScanPayQrCodeActivity,
+                message = message,
+                amount = "",
+                date = "Oct 03, 2020 | 10:00PM",
+                qrCodeUrl = it.qrCode,
+                onNewClicked = ::viewNewClick,
+                onDashBoardClicked = ::viewDashboardClick
+            )
+            dialog.show()
         })
+    }
+
+    private fun viewNewClick() {
+        text_input_ref_num.setText("")
+    }
+
+    private fun viewDashboardClick() {
+        showMain()
     }
 
     private fun cameraPermission() {
