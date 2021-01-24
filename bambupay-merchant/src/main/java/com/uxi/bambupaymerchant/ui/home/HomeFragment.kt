@@ -12,6 +12,7 @@ import com.uxi.bambupaymerchant.ui.history.TransactionDetailsActivity
 import com.uxi.bambupaymerchant.ui.home.adapter.RecentHistoryAdapter
 import com.uxi.bambupaymerchant.ui.history.TransactionHistoryActivity
 import com.uxi.bambupaymerchant.view.fragment.BaseFragment
+import com.uxi.bambupaymerchant.view.fragment.dialog.SuccessDialog
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
@@ -57,6 +58,28 @@ class HomeFragment : BaseFragment() {
             startActivity(intent)
             activity?.overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
         }
+
+        btn_test_print.setOnClickListener {
+            val dialog = SuccessDialog(
+                ctx = requireContext(),
+                message = "Thank you for lorem ipsum",
+                amount = "100",
+                date = "June 19, 1970 04:00 PM",
+                qrCodeUrl = null,
+                txFee = "10",
+                onNewClicked = ::viewNewClick,
+                onDashBoardClicked = ::viewDashboardClick
+            )
+            dialog.show()
+        }
+    }
+
+    private fun viewNewClick() {
+
+    }
+
+    private fun viewDashboardClick() {
+
     }
 
     override fun observeViewModel() {

@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.uxi.bambupaymerchant.R
 import com.uxi.bambupaymerchant.utils.Constants
+import com.uxi.bambupaymerchant.utils.isSunmiDevice
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.CAMERA_REQUEST_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCANNED_QR_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCAN_QR_CODE
@@ -113,8 +114,11 @@ class CashInActivity : BaseActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                showScanCode()
-                showSunmiCamera()
+                if (isSunmiDevice()) {
+                    showSunmiCamera()
+                } else {
+                    showScanCode()
+                }
             }
         }
     }
@@ -164,8 +168,11 @@ class CashInActivity : BaseActivity() {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
         } else {
-//            showScanCode()
-            showSunmiCamera()
+            if (isSunmiDevice()) {
+                showSunmiCamera()
+            } else {
+                showScanCode()
+            }
         }
     }
 
@@ -236,6 +243,7 @@ class CashInActivity : BaseActivity() {
                         amount = amount,
                         date = it.second?.timestamp,
                         qrCodeUrl = null,
+                        txFee = it.second?.fee,
                         onNewClicked = ::viewNewClick,
                         onDashBoardClicked = ::viewDashboardClick
                     )

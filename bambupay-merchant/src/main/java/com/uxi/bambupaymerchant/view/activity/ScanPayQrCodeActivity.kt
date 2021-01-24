@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.utils.isSunmiDevice
 import com.uxi.bambupaymerchant.view.fragment.dialog.SuccessDialog
 import com.uxi.bambupaymerchant.viewmodel.QRCodeViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
@@ -110,11 +111,11 @@ class ScanPayQrCodeActivity : BaseActivity() {
             }
         })
 
-        qrCodeViewModel.successMessage.observe(this, Observer { successMessage ->
-            if (!successMessage.isNullOrEmpty()) {
-//                alertMessage(successMessage)
-            }
-        })
+//        qrCodeViewModel.successMessage.observe(this, Observer { successMessage ->
+//            if (!successMessage.isNullOrEmpty()) {
+////                alertMessage(successMessage)
+//            }
+//        })
 
         qrCodeViewModel.errorMessage.observe(this, Observer { failedMessage ->
             if (!failedMessage.isNullOrEmpty()) {
@@ -147,17 +148,22 @@ class ScanPayQrCodeActivity : BaseActivity() {
         qrCodeViewModel.quickPaySuccessMsg.observe(this, Observer { successMessage ->
             message = successMessage
         })
-        qrCodeViewModel.quickPayData.observe(this, Observer {
-            val dialog = SuccessDialog(
-                ctx = this@ScanPayQrCodeActivity,
-                message = message,
-                amount = "",
-                date = "Oct 03, 2020 | 10:00PM",
-                qrCodeUrl = it.qrCode,
-                onNewClicked = ::viewNewClick,
-                onDashBoardClicked = ::viewDashboardClick
-            )
-            dialog.show()
+        qrCodeViewModel.quickPayQrWithMessage.observe(this, Observer { it1 ->
+            it1?.let {
+                if (!it.first.isNullOrEmpty() && it.second != null) {
+                    val dialog = SuccessDialog(
+                        ctx = this@ScanPayQrCodeActivity,
+                        message = it.first,
+                        amount = null,
+                        date = it.second?.timestamp,
+                        qrCodeUrl = it.second?.qrCode,
+                        txFee = null,
+                        onNewClicked = ::viewNewClick,
+                        onDashBoardClicked = ::viewDashboardClick
+                    )
+                    dialog.show()
+                }
+            }
         })
     }
 
@@ -176,8 +182,11 @@ class ScanPayQrCodeActivity : BaseActivity() {
                 arrayOf(Manifest.permission.CAMERA), ScanCodeActivity.CAMERA_REQUEST_CODE
             )
         } else {
-//            showScanCode()
-            showSunmiCamera()
+            if (isSunmiDevice()) {
+                showSunmiCamera()
+            } else {
+                showScanCode()
+            }
         }
     }
 
@@ -185,8 +194,11 @@ class ScanPayQrCodeActivity : BaseActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == ScanCodeActivity.CAMERA_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                showScanCode()
-                showSunmiCamera()
+                if (isSunmiDevice()) {
+                    showSunmiCamera()
+                } else {
+                    showScanCode()
+                }
             }
         }
     }

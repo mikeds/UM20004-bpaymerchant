@@ -151,8 +151,10 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
     implementation 'org.apache.commons:commons-lang3:3.4'
-    // sunmisdk
+    // sunmisdk: for scanning sunmi device
     compileOnly 'com.sunmi:SunmiSDK:1.0.11'
+    // sunmi printer
+    implementation 'com.sunmi:printerlibrary:1.0.8'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

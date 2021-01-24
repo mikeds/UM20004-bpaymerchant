@@ -20,6 +20,7 @@
         android:textColor="@color/colorPrimary" />
 
     <TextView
+        android:id="@+id/text_amount_lbl"
         style="@style/TextViewTiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,6 +38,25 @@
         android:text="00" />
 
     <TextView
+        android:id="@+id/text_fee_lbl"
+        style="@style/TextViewTiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/fee" />
+
+    <TextView
+        android:id="@+id/text_fee"
+        style="@style/TextViewTiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="₱ 0" />
+
+    <TextView
+        android:id="@+id/text_date_lbl"
         style="@style/TextViewTiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,5 +102,18 @@
         android:text="@string/go_back_to_dashboard"
         android:textAllCaps="false"
         android:textColor="@color/green" />
+
+    <Button
+        android:id="@+id/btn_print"
+        style="@style/TextViewSmallBody.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/bg_rounded_white_border_green"
+        android:text="@string/print"
+        android:textAllCaps="false"
+        android:textColor="@color/green"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </LinearLayout>

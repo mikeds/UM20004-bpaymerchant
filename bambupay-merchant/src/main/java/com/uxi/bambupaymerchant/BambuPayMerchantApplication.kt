@@ -7,6 +7,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import com.uxi.bambupaymerchant.di.component.DaggerAppComponent
+import com.uxi.bambupaymerchant.utils.SunmiPrintHelper
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.realm.Realm
@@ -43,6 +44,8 @@ class BambuPayMerchantApplication : DaggerApplication() {
         ClassicsFooter.REFRESH_FOOTER_FINISH = ""
         ClassicsFooter.REFRESH_FOOTER_FAILED = "Unable to load"//this.resources.getString(R.string.refresh_footer_failed)
         ClassicsFooter.REFRESH_FOOTER_ALLLOADED = ""
+
+        SunmiPrintHelper.getInstance().initSunmiPrinterService(this)
     }
 
     override fun attachBaseContext(base: Context) {
@@ -76,7 +79,8 @@ class BambuPayMerchantApplication : DaggerApplication() {
                             .withLimit(10000) //by default limit of data id 250, but you can increase with this
                             .build()
                     )
-                    .build())
+                    .build()
+            )
         }
     }
 

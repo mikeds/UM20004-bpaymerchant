@@ -91,9 +91,17 @@ class CreateQRActivity : BaseActivity() {
             }
         })
 
-        qrCodeViewModel.createPayQrData.observe(this, Observer { scanQR ->
+        /*qrCodeViewModel.createPayQrData.observe(this, Observer { scanQR ->
             scanQR?.let {
                 loadImage(it.qrCode!!, image_view_qr_code)
+            }
+        })*/
+
+        qrCodeViewModel.createPayQrWithMessage.observe(this, Observer { it1 ->
+            it1?.let {
+                if (!it.first.isNullOrEmpty() && it.second != null) {
+                    loadImage(it.second?.qrCode!!, image_view_qr_code)
+                }
             }
         })
 

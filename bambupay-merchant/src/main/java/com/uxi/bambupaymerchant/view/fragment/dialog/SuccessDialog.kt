@@ -2,13 +2,22 @@ package com.uxi.bambupaymerchant.view.fragment.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.utils.SunmiPrintHelper
+import com.uxi.bambupaymerchant.utils.isSunmiDevice
 import kotlinx.android.synthetic.main.dialog_message_result.*
 
 /**
@@ -21,8 +30,10 @@ class SuccessDialog(
     private val amount: String?,
     private val date: String?,
     private val qrCodeUrl: String?,
+    private val txFee: String?,
     private val onNewClicked: () -> Unit,
-    private val onDashBoardClicked: () -> Unit) : Dialog(ctx) {
+    private val onDashBoardClicked: () -> Unit
+) : Dialog(ctx) {
 
     init {
         setCancelable(false)
@@ -53,6 +64,10 @@ class SuccessDialog(
             loadImage(qrCodeUrl, image_view_qr_code)
         }
 
+        txFee?.let {
+            text_fee.text = ctx.getString(R.string.amount_value, it)
+        }
+
         btn_new_transaction.setOnClickListener {
             dismiss()
             onNewClicked()
@@ -62,15 +77,53 @@ class SuccessDialog(
             dismiss()
             onDashBoardClicked()
         }
+
+        btn_print.setOnClickListener {
+            printDetails()
+        }
+
+        if (isSunmiDevice()) {
+            btn_print.visibility = View.VISIBLE
+        } else {
+            btn_print.visibility = View.GONE
+        }
     }
 
+    private var qrCodeBitmap: Bitmap? = null
     private fun loadImage(imageUrl: String, imageView: ImageView) {
         Glide.with(ctx)
+            .asBitmap()
             .load(imageUrl)
             .thumbnail(1.0f)
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(imageView)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    qrCodeBitmap = resource
+                    imageView.setImageBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+
+                }
+            })
+
+//            .into(imageView)
+    }
+
+    private fun printDetails() {
+        SunmiPrintHelper.getInstance().printText("${text_success_message.text}\n\n", 25F, true)
+        SunmiPrintHelper.getInstance().printText("${text_amount_lbl.text}\n", 20F, false)
+        SunmiPrintHelper.getInstance().printText("${text_amount.text}\n\n", 40F, true)
+        SunmiPrintHelper.getInstance().printText("${text_fee_lbl.text}\n", 20F, true)
+        SunmiPrintHelper.getInstance().printText("${text_fee.text}\n\n", 20F, true)
+        SunmiPrintHelper.getInstance().printText("${text_date.text}\n\n", 20F, true)
+        if (image_view_qr_code.isVisible && qrCodeBitmap != null) {
+//            SunmiPrintHelper.getInstance().printQr("www.sunmi.com", 6, 3)
+            SunmiPrintHelper.getInstance().printBitmap(qrCodeBitmap, 1)
+        }
+        SunmiPrintHelper.getInstance().print2Line()
+        SunmiPrintHelper.getInstance().feedPaper()
     }
 
 }

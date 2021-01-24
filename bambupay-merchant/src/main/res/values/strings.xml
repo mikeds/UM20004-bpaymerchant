@@ -138,6 +138,7 @@
     <string name="approved">Approved</string>
     <string name="cancelled">Cancelled</string>
     <string name="income_shares">Income Shares</string>
+    <string name="print">Print</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

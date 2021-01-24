@@ -7,7 +7,7 @@ import java.io.Serializable
  * Created by Eraño Payawal on 10/5/20.
  * hunterxer31@gmail.com
  */
-class ScanQr : Serializable {
+class QuickPayScanQr : Serializable {
 
     @SerializedName("sender_ref_id")
     var senderRefId: String? = null
