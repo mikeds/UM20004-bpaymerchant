@@ -24,7 +24,9 @@ open class Request private constructor(
     private val transactionNumber: String?,
 
     @SerializedName("sender_ref_id")
-    private val senderRefId: String?) {
+    private val senderRefId: String?,
+
+    private val type: String?) {
 
     data class Builder(
         private var merchant: String? = null,
@@ -44,7 +46,9 @@ open class Request private constructor(
         private var transactionNumber: String? = null,
 
         @SerializedName("sender_ref_id")
-        private var senderRefId: String? = null) {
+        private var senderRefId: String? = null,
+
+        private var type: String? = null) {
 
         fun setUsername(username: String) = apply { this.username = username }
         fun setCode(code: String) = apply { this.code = code }
@@ -54,8 +58,9 @@ open class Request private constructor(
         fun setSendTo(sentTo: String?) = apply { this.sentTo = sentTo }
         fun setTransactionNumber(transactionNumber: String?) = apply { this.transactionNumber = transactionNumber }
         fun setSenderRefId(senderRefId: String?) = apply { this.senderRefId = senderRefId }
+        fun setType(type: String?) = apply { this.type = type }
 
-        fun build() = Request(merchant, amount, sentTo, username, password, code, transactionNumber, senderRefId)
+        fun build() = Request(merchant, amount, sentTo, username, password, code, transactionNumber, senderRefId, type)
     }
 
 }

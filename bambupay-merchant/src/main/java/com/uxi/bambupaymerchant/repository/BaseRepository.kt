@@ -19,9 +19,9 @@ abstract class BaseRepository {
                 var errorMessage: String? = null
                 res.errorBody()?.let { body ->
                     val responseBody = GenericApiResponse.create<Any>(body.string())
-                    when (responseBody.message) {
+                    when (responseBody.errorMessage) {
                         null -> Timber.tag("Error").e("empty error message")
-                        else -> errorMessage = responseBody.message
+                        else -> errorMessage = responseBody.errorMessage
                     }
                 }
                 return when (res.code()) {

@@ -1,2 +1,3 @@
+include ':card-library'
 include ':bambupay-merchant'
 rootProject.name = "BambuPayMerchant"

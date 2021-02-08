@@ -25,7 +25,7 @@ constructor(private val webService: WebService): BaseRepository() {
             .observeOn(AndroidSchedulers.mainThread())
             .map { res ->
                 when (val obj: OtcCashIn? = res.response) {
-                    null -> ResultWithMessage.Error(false, res?.message)
+                    null -> ResultWithMessage.Error(false, res?.errorMessage)
                     else -> ResultWithMessage.Success(obj, res.successMessage)
                 }
             }

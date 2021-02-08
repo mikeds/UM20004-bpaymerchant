@@ -14,5 +14,8 @@
     <color name="white">#FFFFFF</color>
     <color name="red">#B53C5D</color>
     <color name="background_loading">#dddddd</color>
+    <color name="darker_grey">#666666</color>
+    <color name="black_75">#666666</color>
+    <color name="black_25">#C8C7CC</color>
 
 </resources>

@@ -13,6 +13,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_client_transfer">Client Fund Transfer</string>
+    <string name="menu_cash_in">Cash In</string>
     <string name="menu_post_transfer">POS Fund Transfer</string>
     <string name="menu_batch_transfer">Batch Fund Transfer</string>
     <string name="menu_settings">Settings</string>
@@ -139,6 +140,17 @@
     <string name="cancelled">Cancelled</string>
     <string name="income_shares">Income Shares</string>
     <string name="print">Print</string>
+
+    <string name="cash_in_card">Cash In via Credit or Debit Card</string>
+    <string name="cash_in_bancnet">Cash In via Bancnet</string>
+    <string name="cash_in_grab_pay">Cash In via GrabPay</string>
+    <string name="cash_in_gcash">Cash In via GCash</string>
+    <string name="cash_in_paymaya">Cash In via Paymaya</string>
+    <string name="cash_in_details">Cash In Details</string>
+    <string name="hint_card_numbers">Card numbers</string>
+    <string name="hint_card_date">MM/YY</string>
+    <string name="hint_cvv">CVV</string>
+    <string name="hint_card_holder">Cardholder\'s Name</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

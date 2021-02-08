@@ -94,7 +94,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
                 if (it.response != null) {
 
                 } else {
-                    it.message?.let { error ->
+                    it.errorMessage?.let { error ->
                         errorMessage.value = error
                         Log.e("DEBUG", "error message:: $error")
                     }
@@ -130,7 +130,7 @@ constructor(private val repository: AcceptTransactionRepository, private val uti
                 if (it.response != null) {
 
                 } else {
-                    it.message?.let { error ->
+                    it.errorMessage?.let { error ->
                         errorMessage.value = error
                         Log.e("DEBUG", "error message:: $error")
                     }

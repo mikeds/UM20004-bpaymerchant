@@ -1,9 +1,7 @@
 package com.uxi.bambupaymerchant.repository
 
-import com.uxi.bambupaymerchant.api.GenericApiResponse
 import com.uxi.bambupaymerchant.api.Request
 import com.uxi.bambupaymerchant.api.WebService
-import com.uxi.bambupaymerchant.model.OtcCashIn
 import com.uxi.bambupaymerchant.model.QuickPayScanQr
 import com.uxi.bambupaymerchant.model.ResultWithMessage
 import com.uxi.bambupaymerchant.model.ScanQr
@@ -26,7 +24,7 @@ class QrCodeRepository @Inject constructor(private val webService: WebService): 
             .observeOn(AndroidSchedulers.mainThread())
             .map { res ->
                 when (val obj: QuickPayScanQr? = res.response) {
-                    null -> ResultWithMessage.Error(false, res?.message)
+                    null -> ResultWithMessage.Error(false, res?.errorMessage)
                     else -> ResultWithMessage.Success(obj, res.successMessage)
                 }
             }
@@ -39,7 +37,7 @@ class QrCodeRepository @Inject constructor(private val webService: WebService): 
             .observeOn(AndroidSchedulers.mainThread())
             .map { res ->
                 when (val obj: ScanQr? = res.response) {
-                    null -> ResultWithMessage.Error(false, res?.message)
+                    null -> ResultWithMessage.Error(false, res?.errorMessage)
                     else -> ResultWithMessage.Success(obj, res.successMessage)
                 }
             }

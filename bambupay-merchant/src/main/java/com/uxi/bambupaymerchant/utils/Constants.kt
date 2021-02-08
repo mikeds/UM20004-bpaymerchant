@@ -41,5 +41,18 @@ class Constants {
         const val MODE_OF_TRANSACTION = "mode_of_transaction"
 
         const val SUNMI_P2_EU = "SUNMI P2-EU"
+
+        const val CASH_IN_CARD_SCREEN = "cash_in_card_screen"
+        const val CASH_IN_BANCNET_SCREEN = "cash_in_bancnet_screen"
+        const val CASH_IN_GRAB_SCREEN = "cash_in_grab_screen"
+        const val CASH_IN_GCASH_SCREEN = "cash_in_gcash_screen"
+        const val CASH_IN_PAYMAYA_SCREEN = "cash_in_paymaya_screen"
+
+        const val CASH_IN_PAYNAMICS_CC = "cc"
+        const val CASH_IN_PAYNAMICS_BANCNET = "bancnet"
+        const val CASH_IN_PAYNAMICS_GRAB_PAY = "grabpay"
+        const val CASH_IN_PAYNAMICS_GCASH = "gcash"
+        const val CASH_IN_PAYNAMICS_PAYMAYA = "paymaya"
+        const val CASH_IN_REDIRECT_URL = "redirect_url"
     }
 }

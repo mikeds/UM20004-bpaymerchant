@@ -65,7 +65,7 @@ constructor(private val repository: LoginRepository, private val utils: Utils) :
                             isSuccessLoggedIn.value = true
                         }
                     } else {
-                        it.message?.let { error ->
+                        it.errorMessage?.let { error ->
                             errorMessage.value = error
                             Timber.tag("DEBUG").e("error message:: $error")
                         }

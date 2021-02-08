@@ -32,8 +32,8 @@ class SuccessDialog(
     private val qrCodeUrl: String?,
     private val txFee: String?,
     private val onNewClicked: () -> Unit,
-    private val onDashBoardClicked: () -> Unit
-) : Dialog(ctx) {
+    private val onDashBoardClicked: () -> Unit,
+    private val isTransactionVisible: Boolean? = true) : Dialog(ctx) {
 
     init {
         setCancelable(false)
@@ -62,6 +62,19 @@ class SuccessDialog(
         if (!qrCodeUrl.isNullOrEmpty()) {
             image_view_qr_code.visibility = View.VISIBLE
             loadImage(qrCodeUrl, image_view_qr_code)
+        }
+
+        isTransactionVisible?.let {
+            if (it) {
+                btn_new_transaction.visibility = View.VISIBLE
+            } else {
+                btn_new_transaction.visibility = View.GONE
+            }
+        }
+
+        if (txFee.isNullOrEmpty()) {
+            text_fee_lbl.visibility = View.GONE
+            text_fee.visibility = View.GONE
         }
 
         txFee?.let {
@@ -107,16 +120,18 @@ class SuccessDialog(
 
                 }
             })
-
-//            .into(imageView)
     }
 
     private fun printDetails() {
         SunmiPrintHelper.getInstance().printText("${text_success_message.text}\n\n", 25F, true)
         SunmiPrintHelper.getInstance().printText("${text_amount_lbl.text}\n", 20F, false)
         SunmiPrintHelper.getInstance().printText("${text_amount.text}\n\n", 40F, true)
-        SunmiPrintHelper.getInstance().printText("${text_fee_lbl.text}\n", 20F, true)
-        SunmiPrintHelper.getInstance().printText("${text_fee.text}\n\n", 20F, true)
+
+        if (!txFee.isNullOrEmpty()) {
+            SunmiPrintHelper.getInstance().printText("${text_fee_lbl.text}\n", 20F, true)
+            SunmiPrintHelper.getInstance().printText("${text_fee.text}\n\n", 20F, true)
+        }
+
         SunmiPrintHelper.getInstance().printText("${text_date.text}\n\n", 20F, true)
         if (image_view_qr_code.isVisible && qrCodeBitmap != null) {
 //            SunmiPrintHelper.getInstance().printQr("www.sunmi.com", 6, 3)

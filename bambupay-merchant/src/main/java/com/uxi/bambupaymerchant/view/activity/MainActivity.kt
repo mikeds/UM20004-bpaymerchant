@@ -133,6 +133,13 @@ class MainActivity : BaseActivity() {
                     drawerLayout?.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.nav_client_cash_in_paynamics -> {
+                    val intent = Intent(this@MainActivity, SelectCashInActivity::class.java)
+//                    intent.putExtra(MODE_OF_TRANSACTION, CASH_IN)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)
+                    true
+                }
                 else -> false
             }
         }

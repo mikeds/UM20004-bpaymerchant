@@ -11,6 +11,9 @@
             android:id="@+id/nav_client_fund_transfer"
             android:title="@string/menu_client_transfer" />
         <item
+            android:id="@+id/nav_client_cash_in_paynamics"
+            android:title="@string/menu_cash_in" />
+        <item
             android:id="@+id/nav_pos_fund_transfer"
             android:title="@string/menu_post_transfer" />
         <item

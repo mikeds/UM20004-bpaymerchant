@@ -1,6 +1,7 @@
 package com.uxi.bambupaymerchant.api
 
 import com.uxi.bambupaymerchant.model.*
+import com.uxi.bambupaymerchant.model.paynamics.Paynamics
 import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -40,5 +41,11 @@ interface WebService {
     @GET("merchants/transactions/{transactionId}")
     fun history(@Path("transactionId") transactionId: String): Flowable<GenericApiResponse<History>>
 //    fun history(@Path(value = "transactionId", encoded = true) transactionId: String): Flowable<GenericApiResponse<History>>
+
+    @POST("transactions/merchant/top-up")
+    fun cashInPaynamics(@Body payload: HashMap<String, String>): Flowable<GenericApiResponse<Paynamics>>
+
+    @POST("transactions/merchant/top-up")
+    fun cashInPaynamics(@Body params: Request): Flowable<GenericApiResponse<Paynamics>>
 
 }
