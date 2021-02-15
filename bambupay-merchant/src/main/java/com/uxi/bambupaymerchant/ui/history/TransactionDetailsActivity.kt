@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.uxi.bambupaymerchant.R
-import com.uxi.bambupaymerchant.model.Transaction
 import com.uxi.bambupaymerchant.utils.Constants
 import com.uxi.bambupaymerchant.utils.convertTimeToDate
 import com.uxi.bambupaymerchant.view.activity.BaseActivity
@@ -115,6 +114,7 @@ class TransactionDetailsActivity : BaseActivity() {
             Constants.QUICK_PAY_QR -> txt_transaction_type.text = getString(R.string.quick_qr)
             Constants.CREATE_SCAN_QR -> txt_transaction_type.text = getString(R.string.create_scan_qr)
             Constants.INCOME_SHARES -> txt_transaction_type.text = getString(R.string.income_shares)
+            else -> { txt_transaction_type.text = transactionType }
         }
     }
 
