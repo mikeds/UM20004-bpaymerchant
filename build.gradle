@@ -11,6 +11,7 @@ buildscript {
     ext.daggerVersion = "2.23.2"
     ext.realmAdapterVersion = "3.1.0"
     ext.timberVersion = "4.7.1"
+    ext.androidxLifecycleExtensionsVersion = "2.2.0"
     repositories {
         google()
         jcenter()

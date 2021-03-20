@@ -11,19 +11,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.databinding.ActivityCashInBinding
 import com.uxi.bambupaymerchant.utils.Constants
 import com.uxi.bambupaymerchant.utils.isSunmiDevice
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.CAMERA_REQUEST_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCANNED_QR_CODE
 import com.uxi.bambupaymerchant.view.activity.ScanCodeActivity.Companion.SCAN_QR_CODE
+import com.uxi.bambupaymerchant.view.ext.viewBinding
 import com.uxi.bambupaymerchant.view.fragment.dialog.SuccessDialog
 import com.uxi.bambupaymerchant.viewmodel.AcceptTransactionViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
-import kotlinx.android.synthetic.main.app_toolbar.*
-import kotlinx.android.synthetic.main.content_cash_in.*
-import kotlinx.android.synthetic.main.content_cash_in.btn_cancel
-import kotlinx.android.synthetic.main.content_cash_in.btn_scan_qr_code
-import kotlinx.android.synthetic.main.content_cash_in.btn_transact
 import timber.log.Timber
 import java.util.ArrayList
 import java.util.HashMap
@@ -38,12 +35,15 @@ class CashInActivity : BaseActivity() {
     private val userTokenModel by viewModel<UserTokenViewModel>()
     private val cashInViewModel by viewModels<AcceptTransactionViewModel> { viewModelFactory }
 
+    private val binding by viewBinding(ActivityCashInBinding::inflate)
+
     private val transactionType: String? by lazy {
         intent?.extras?.getString(Constants.MODE_OF_TRANSACTION)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         setupToolbar()
     }
 
@@ -98,16 +98,35 @@ class CashInActivity : BaseActivity() {
         }
     }
 
+    private fun transactionType() {
+        transactionType?.let {
+            when (it) {
+                Constants.CASH_IN -> {
+                    binding.contentCashIn.textTitleHeader.text = getString(R.string.cash_in)
+                    binding.contentCashIn.textScan.text = getString(R.string.scan_client)
+                }
+                Constants.CASH_OUT -> {
+                    binding.contentCashIn.textTitleHeader.text = getString(R.string.cash_out)
+                    binding.contentCashIn.textScan.text = getString(R.string.scan)
+                }
+                Constants.SEND_MONEY -> {
+                    binding.contentCashIn.textTitleHeader.text = getString(R.string.send_money)
+                    binding.contentCashIn.textScan.text = getString(R.string.scan)
+                }
+            }
+        }
+    }
+
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-        tv_toolbar_title?.text = titleBar()
+        setSupportActionBar(binding.appToolbar.toolbar)
+        binding.appToolbar.tvToolbarTitle.text = titleBar()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
     override fun initView() {
-        text_title_header.text = titleHeader()
+        transactionType()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -129,7 +148,7 @@ class CashInActivity : BaseActivity() {
             val qrCode: String? = data?.getStringExtra(SCANNED_QR_CODE)
             Log.e("DEBUG", "qrCode:: $qrCode")
             qrCode?.let {
-                text_input_transact_num.setText(it)
+                binding.contentCashIn.textInputTransactNum.setText(it)
             }
         } else if (requestCode == ScanPayQrCodeActivity.START_SCAN) {
             val bundle = data?.extras
@@ -139,7 +158,7 @@ class CashInActivity : BaseActivity() {
                     val dataItem = it[0].getValue("VALUE")
                     Timber.tag("DEBUG").e("dataItem:: $dataItem")
                     if (!dataItem.isNullOrEmpty()) {
-                        text_input_transact_num.setText(dataItem)
+                        binding.contentCashIn.textInputTransactNum.setText(dataItem)
                     }
                 }
             }
@@ -151,13 +170,13 @@ class CashInActivity : BaseActivity() {
     }
 
     override fun events() {
-        btn_scan_qr_code.setOnClickListener {
+        binding.contentCashIn.btnScanQrCode.setOnClickListener {
             cameraPermission()
         }
-        btn_transact.setOnClickListener {
+        binding.contentCashIn.btnTransact.setOnClickListener {
             transaction()
         }
-        btn_cancel.setOnClickListener {
+        binding.contentCashIn.btnCancel.setOnClickListener {
             onBackPressed()
         }
     }
@@ -255,7 +274,7 @@ class CashInActivity : BaseActivity() {
     }
 
     private fun viewNewClick() {
-        text_input_transact_num.setText("")
+        binding.contentCashIn.textInputTransactNum.setText("")
     }
 
     private fun viewDashboardClick() {
@@ -275,13 +294,13 @@ class CashInActivity : BaseActivity() {
         if (!transactionType.isNullOrEmpty()) {
             when {
                 transactionType.equals(Constants.CASH_IN) -> {
-                    cashInViewModel.subscribeCashIn(text_input_transact_num.text.toString())
+                    cashInViewModel.subscribeCashIn(binding.contentCashIn.textInputTransactNum.text.toString())
                 }
                 transactionType.equals(Constants.CASH_OUT) -> {
-                    cashInViewModel.subscribeCashOut(text_input_transact_num.text.toString())
+                    cashInViewModel.subscribeCashOut(binding.contentCashIn.textInputTransactNum.text.toString())
                 }
                 transactionType.equals(Constants.SEND_MONEY) -> {
-                    cashInViewModel.subscribeSendMoney(text_input_transact_num.text.toString())
+                    cashInViewModel.subscribeSendMoney(binding.contentCashIn.textInputTransactNum.text.toString())
                 }
             }
         }

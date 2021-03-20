@@ -1,15 +1,16 @@
 package com.uxi.bambupaymerchant.viewmodel
 
-import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.uxi.bambupaymerchant.api.Request
-import com.uxi.bambupaymerchant.model.OtcCashIn
+import com.uxi.bambupaymerchant.lookup.TxDetails
 import com.uxi.bambupaymerchant.model.QuickPayScanQr
 import com.uxi.bambupaymerchant.model.ResultWithMessage
 import com.uxi.bambupaymerchant.model.ScanQr
 import com.uxi.bambupaymerchant.repository.QrCodeRepository
 import com.uxi.bambupaymerchant.utils.Utils
+import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,6 +29,8 @@ constructor(private val repository: QrCodeRepository, private val utils: Utils) 
     private val _successMessage = MutableLiveData<String>()
     private val _quickPayData = MutableLiveData<QuickPayScanQr>()
     private val _createPayQrData = MutableLiveData<ScanQr>()
+    private val _txDetails = MutableLiveData<TxDetails>()
+    val txDetails: LiveData<TxDetails> = _txDetails
 
     val quickPayQrWithMessage: MediatorLiveData<Pair<String?, QuickPayScanQr?>> = MediatorLiveData<Pair<String?, QuickPayScanQr?>>()
         .apply {
@@ -58,26 +61,13 @@ constructor(private val repository: QrCodeRepository, private val utils: Utils) 
         val requestBuilder = Request.Builder()
             .setSenderRefId(refIdNumber).build()
 
-        disposable?.add(repository.loadAcceptPayQr(requestBuilder)
+        repository.loadAcceptPayQr(requestBuilder)
             .doOnSubscribe { loading.value = true }
             .doAfterTerminate { loading.value = false }
             .subscribe({
                 resultState(it)
-                /*if (it.response != null) {
-                    quickPaySuccessMsg.value = it.successMessage
-                    quickPayData.value = it.response
-                } else {
-                    it.message?.let { error ->
-                        errorMessage.value = error
-                        Log.e("DEBUG", "error message:: $error")
-                    }
-                    it.successMessage?.let { message ->
-                        successMessage.value = message
-                    }
-                }*/
-
             }, Timber::e)
-        )
+            .addTo(disposable)
 
     }
 
@@ -90,23 +80,25 @@ constructor(private val repository: QrCodeRepository, private val utils: Utils) 
         val request = Request.Builder()
             .setAmount(amount).build()
 
-        disposable?.add(repository.loadCreatePayQr(request)
+        repository.loadCreatePayQr(request)
             .doOnSubscribe { loading.value = true }
             .doAfterTerminate { loading.value = false }
             .subscribe({
-                /*if (it.response != null) {
-                    it.response?.let { it1 ->
-                        createPayQrData.value = it1
-                    }
-                } else {
-                    it.message?.let { error ->
-                        errorMessage.value = error
-                        Log.e("DEBUG", "error message:: $error")
-                    }
-                }*/
                 resultState(it)
             }, Timber::e)
-        )
+            .addTo(disposable)
+    }
+
+    fun subscribeTxDetails(refIdNumber: String?) {
+        if (refIdNumber.isNullOrEmpty()) return
+
+        repository.loadTxDetails(refIdNumber)
+            .doOnSubscribe { loading.value = true }
+            .doAfterTerminate { loading.value = false }
+            .subscribe({
+                resultState(it)
+            }, Timber::e)
+            .addTo(disposable)
     }
 
     private fun <T : Any> resultState(t: ResultWithMessage<T>) {
@@ -122,6 +114,10 @@ constructor(private val repository: QrCodeRepository, private val utils: Utils) 
                         val createPayScanQr = t.value as ScanQr
                         _createPayQrData.postValue(createPayScanQr)
                         _successMessage.postValue(t.message)
+                    }
+                    is TxDetails -> {
+                        val txDetails = t.value as TxDetails
+                        _txDetails.value = txDetails
                     }
                 }
             }

@@ -3,15 +3,16 @@ package com.uxi.bambupaymerchant.view.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.egpayawal.card_library.view.CreditCardExpiryTextWatcher
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.databinding.ActivityCashInCardBinding
 import com.uxi.bambupaymerchant.utils.Constants
 import com.uxi.bambupaymerchant.utils.Constants.Companion.CASH_IN_REDIRECT_URL
+import com.uxi.bambupaymerchant.view.ext.viewBinding
 import com.uxi.bambupaymerchant.viewmodel.CashInViewModel
-import kotlinx.android.synthetic.main.app_toolbar.*
-import kotlinx.android.synthetic.main.content_cash_in_card.*
 
 /**
  * Created by Eraño Payawal on 12/15/20.
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.content_cash_in_card.*
 class CashInCardActivity : BaseActivity() {
 
     private val cashInViewModel by viewModels<CashInViewModel> { viewModelFactory }
+    private val binding by viewBinding(ActivityCashInCardBinding::inflate)
 
     private val fromScreen by lazy {
         intent?.getStringExtra(Constants.SCREEN_FROM)
@@ -27,6 +29,7 @@ class CashInCardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         setupToolbar()
         initViews()
         observeViewModel()
@@ -40,7 +43,11 @@ class CashInCardActivity : BaseActivity() {
     }
 
     override fun initView() {
-
+        fromScreen?.let {
+            if (it == Constants.CASH_IN_BANCNET_SCREEN) {
+                binding.content.textMinimumLbl.visibility = View.GONE
+            }
+        }
     }
 
     override fun finish() {
@@ -63,7 +70,7 @@ class CashInCardActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.appToolbar.toolbar)
         val title = when (fromScreen) {
             Constants.CASH_IN_CARD_SCREEN -> {
                 getString(R.string.cash_in_card)
@@ -83,14 +90,14 @@ class CashInCardActivity : BaseActivity() {
             else -> getString(R.string.cash_in_card)
         }
 
-        tv_toolbar_title?.text = title
+        binding.appToolbar.tvToolbarTitle.text = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
     private fun initViews() {
-        text_input_card_expiration.addTextChangedListener(CreditCardExpiryTextWatcher(text_input_card_expiration))
+        binding.content.textInputCardExpiration.addTextChangedListener(CreditCardExpiryTextWatcher(binding.content.textInputCardExpiration))
     }
 
     override fun observeViewModel() {
@@ -116,11 +123,11 @@ class CashInCardActivity : BaseActivity() {
     }
 
     private fun viewNewClick() {
-        text_input_amount.setText("")
-        text_input_card_number.setText("")
-        text_input_card_expiration.setText("")
-        text_input_cvv.setText("")
-        text_input_card_name.setText("")
+        binding.content.textInputAmount.setText("")
+        binding.content.textInputCardNumber.setText("")
+        binding.content.textInputCardExpiration.setText("")
+        binding.content.textInputCvv.setText("")
+        binding.content.textInputCardName.setText("")
     }
 
     private fun viewDashboardClick() {
@@ -128,18 +135,18 @@ class CashInCardActivity : BaseActivity() {
     }
 
     override fun events() {
-        btn_transact.setOnClickListener {
-            cashInViewModel.subscribeCashInPaynamics(text_input_amount.text.toString(), fromScreen)
+        binding.content.btnTransact.setOnClickListener {
+            cashInViewModel.subscribeCashInPaynamics(binding.content.textInputAmount.text.toString(), fromScreen)
         }
 
-        btn_cancel.setOnClickListener {
+        binding.content.btnCancel.setOnClickListener {
             onBackPressed()
         }
     }
 
     private fun showPaynamicsWebview(url: String) {
         val intent = Intent(this@CashInCardActivity, CashInPaynamicsActivity::class.java)
-        intent.putExtra(Constants.AMOUNT, text_input_amount.text.toString())
+        intent.putExtra(Constants.AMOUNT, binding.content.textInputAmount.text.toString())
         intent.putExtra(CASH_IN_REDIRECT_URL, url)
         startActivity(intent)
         overridePendingTransition(R.anim.from_right_in, R.anim.from_left_out)

@@ -89,6 +89,9 @@ constructor(private val repository: CashInRepository, private val utils: Utils) 
             return
         }
 
+        val amountValue = amount.toInt()
+        if (fromScreen != Constants.CASH_IN_BANCNET_SCREEN && amountValue < 500) return
+
         val type = when (fromScreen) {
             Constants.CASH_IN_CARD_SCREEN -> Constants.CASH_IN_PAYNAMICS_CC
             Constants.CASH_IN_BANCNET_SCREEN -> Constants.CASH_IN_PAYNAMICS_BANCNET

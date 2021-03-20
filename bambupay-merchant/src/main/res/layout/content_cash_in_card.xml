@@ -43,6 +43,13 @@
             android:paddingBottom="15dp" />
 
         <TextView
+            android:id="@+id/text_minimum_lbl"
+            style="@style/TextViewSmall.SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_in_minimum_amount" />
+
+        <TextView
             style="@style/TextViewSmall.SemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

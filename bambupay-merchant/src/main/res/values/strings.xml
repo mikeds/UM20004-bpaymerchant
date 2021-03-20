@@ -14,7 +14,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_client_transfer">Client Fund Transfer</string>
     <string name="menu_cash_in">Cash In</string>
-    <string name="menu_post_transfer">POS Fund Transfer</string>
+    <string name="menu_post_transfer">Pay Bills</string>
     <string name="menu_batch_transfer">Batch Fund Transfer</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_faq">FAQ</string>
@@ -151,6 +151,10 @@
     <string name="hint_card_date">MM/YY</string>
     <string name="hint_cvv">CVV</string>
     <string name="hint_card_holder">Cardholder\'s Name</string>
+    <string name="scan_client">Scan to Client Cash-In</string>
+    <string name="create_qr_message">Show the QR Code to the client to scan.</string>
+    <string name="scan_press">Press button to Scan</string>
+    <string name="cash_in_minimum_amount">Note: Minimum amount to proceed is php 500.00</string>
 
     <string-array name="gender_choice_array">
         <item>Male</item>

@@ -6,15 +6,16 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.databinding.ActivityScanPayQrCodeBinding
 import com.uxi.bambupaymerchant.utils.isSunmiDevice
+import com.uxi.bambupaymerchant.view.ext.viewBinding
 import com.uxi.bambupaymerchant.view.fragment.dialog.SuccessDialog
 import com.uxi.bambupaymerchant.viewmodel.QRCodeViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
-import kotlinx.android.synthetic.main.app_toolbar.*
-import kotlinx.android.synthetic.main.content_scan_pay_qr_code.*
 import timber.log.Timber
 import java.util.*
 
@@ -27,8 +28,11 @@ class ScanPayQrCodeActivity : BaseActivity() {
     private val userTokenModel by viewModel<UserTokenViewModel>()
     private val qrCodeViewModel by viewModel<QRCodeViewModel>()
 
+    private val binding by viewBinding(ActivityScanPayQrCodeBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         setupToolbar()
     }
 
@@ -67,7 +71,8 @@ class ScanPayQrCodeActivity : BaseActivity() {
             val qrCode: String? = data?.getStringExtra(ScanCodeActivity.SCANNED_QR_CODE)
             Log.e("DEBUG", "qrCode:: $qrCode")
             qrCode?.let {
-                text_input_ref_num.setText(it)
+                binding.contentScanPay.textInputRefNum.setText(it)
+                qrCodeViewModel.subscribeTxDetails(it)
             }
         } else if (requestCode == START_SCAN) {
             val bundle = data?.extras
@@ -77,7 +82,7 @@ class ScanPayQrCodeActivity : BaseActivity() {
                     val dataItem = it[0].getValue("VALUE")
                     Timber.tag("DEBUG").e("dataItem:: $dataItem")
                     if (!dataItem.isNullOrEmpty()) {
-                        text_input_ref_num.setText(dataItem)
+                        binding.contentScanPay.textInputRefNum.setText(dataItem)
                     }
                 }
             }
@@ -85,22 +90,22 @@ class ScanPayQrCodeActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-        tv_toolbar_title?.text = getString(R.string.scan_pay)
+        setSupportActionBar(binding.appToolbar.toolbar)
+        binding.appToolbar.tvToolbarTitle.text = getString(R.string.scan_pay)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
     override fun events() {
-        btn_scan_qr_code.setOnClickListener {
+        binding.contentScanPay.btnScanQrCode.setOnClickListener {
             cameraPermission()
         }
-        btn_cancel.setOnClickListener {
+        binding.contentScanPay.btnCancel.setOnClickListener {
             onBackPressed()
         }
-        btn_transact.setOnClickListener {
-            qrCodeViewModel.subscribeScanPayQr(text_input_ref_num.text.toString())
+        binding.contentScanPay.btnTransact.setOnClickListener {
+            qrCodeViewModel.subscribeScanPayQr(binding.contentScanPay.textInputRefNum.text.toString())
         }
     }
 
@@ -140,7 +145,7 @@ class ScanPayQrCodeActivity : BaseActivity() {
 
         userTokenModel.isTokenRefresh.observe(this, Observer { isTokenRefresh ->
             if (isTokenRefresh) {
-                qrCodeViewModel.subscribeScanPayQr(text_input_ref_num.text.toString())
+                qrCodeViewModel.subscribeScanPayQr(binding.contentScanPay.textInputRefNum.text.toString())
             }
         })
 
@@ -154,10 +159,10 @@ class ScanPayQrCodeActivity : BaseActivity() {
                     val dialog = SuccessDialog(
                         ctx = this@ScanPayQrCodeActivity,
                         message = it.first,
-                        amount = null,
+                        amount = it.second?.amount,
                         date = it.second?.timestamp,
                         qrCodeUrl = it.second?.qrCode,
-                        txFee = null,
+                        txFee = it.second?.fee,
                         onNewClicked = ::viewNewClick,
                         onDashBoardClicked = ::viewDashboardClick
                     )
@@ -165,10 +170,21 @@ class ScanPayQrCodeActivity : BaseActivity() {
                 }
             }
         })
+
+        qrCodeViewModel.txDetails.observe(this, { it1 ->
+            it1?.let {
+                binding.contentScanPay.containerFee.visibility = View.VISIBLE
+                binding.contentScanPay.textFee.text = it.fee
+                binding.contentScanPay.textAmount.text = it.amount
+            }
+        })
     }
 
     private fun viewNewClick() {
-        text_input_ref_num.setText("")
+        binding.contentScanPay.textInputRefNum.setText("")
+        binding.contentScanPay.containerFee.visibility = View.GONE
+        binding.contentScanPay.textFee.text = ""
+        binding.contentScanPay.textAmount.text = ""
     }
 
     private fun viewDashboardClick() {

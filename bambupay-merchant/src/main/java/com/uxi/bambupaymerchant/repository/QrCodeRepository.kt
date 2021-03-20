@@ -2,6 +2,7 @@ package com.uxi.bambupaymerchant.repository
 
 import com.uxi.bambupaymerchant.api.Request
 import com.uxi.bambupaymerchant.api.WebService
+import com.uxi.bambupaymerchant.lookup.TxDetails
 import com.uxi.bambupaymerchant.model.QuickPayScanQr
 import com.uxi.bambupaymerchant.model.ResultWithMessage
 import com.uxi.bambupaymerchant.model.ScanQr
@@ -38,6 +39,19 @@ class QrCodeRepository @Inject constructor(private val webService: WebService): 
             .map { res ->
                 when (val obj: ScanQr? = res.response) {
                     null -> ResultWithMessage.Error(false, res?.errorMessage)
+                    else -> ResultWithMessage.Success(obj, res.successMessage)
+                }
+            }
+            .onErrorReturn { errorHandler(it) }
+    }
+
+    fun loadTxDetails(refIdNumber: String?): Flowable<ResultWithMessage<TxDetails>> {
+        return webService.getTxDetails(refIdNumber!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { res ->
+                when (val obj: TxDetails? = res.response) {
+                    null -> ResultWithMessage.Error(false, "")
                     else -> ResultWithMessage.Success(obj, res.successMessage)
                 }
             }

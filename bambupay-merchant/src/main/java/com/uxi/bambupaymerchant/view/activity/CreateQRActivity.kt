@@ -8,10 +8,10 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.uxi.bambupaymerchant.R
+import com.uxi.bambupaymerchant.databinding.ActivityCreateQrcodeBinding
+import com.uxi.bambupaymerchant.view.ext.viewBinding
 import com.uxi.bambupaymerchant.viewmodel.QRCodeViewModel
 import com.uxi.bambupaymerchant.viewmodel.UserTokenViewModel
-import kotlinx.android.synthetic.main.activity_create_qrcode.*
-import kotlinx.android.synthetic.main.app_toolbar.*
 
 /**
  * Created by Eraño Payawal on 10/4/20.
@@ -22,8 +22,11 @@ class CreateQRActivity : BaseActivity() {
     private val qrCodeViewModel by viewModel<QRCodeViewModel>()
     private val userTokenModel by viewModel<UserTokenViewModel>()
 
+    private val binding by viewBinding(ActivityCreateQrcodeBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         setupToolbar()
     }
 
@@ -57,30 +60,30 @@ class CreateQRActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-        tv_toolbar_title?.text = getString(R.string.create_qr)
+        setSupportActionBar(binding.appToolbar.toolbar)
+        binding.appToolbar.tvToolbarTitle.text = getString(R.string.create_qr)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
     }
 
     override fun events() {
-        btn_retry.setOnClickListener {
-            text_input_amount.setText("")
-            image_view_qr_code.setImageDrawable(null)
-            container_buttons.visibility = View.GONE
-            btn_generate.visibility = View.VISIBLE
+        binding.btnRetry.setOnClickListener {
+            binding.textInputAmount.setText("")
+            binding.imageViewQrCode.setImageDrawable(null)
+            binding.containerButtons.visibility = View.GONE
+            binding.btnGenerate.visibility = View.VISIBLE
         }
 
-        btn_cancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             onBackPressed()
         }
 
-        btn_generate.setOnClickListener {
+        binding.btnGenerate.setOnClickListener {
             it.hideKeyboard()
-            btn_generate.visibility = View.GONE
-            container_buttons.visibility = View.VISIBLE
-            qrCodeViewModel.subscribeCreatePayQr(text_input_amount.text.toString())
+            binding.btnGenerate.visibility = View.GONE
+            binding.containerButtons.visibility = View.VISIBLE
+            qrCodeViewModel.subscribeCreatePayQr(binding.textInputAmount.text.toString())
         }
     }
 
@@ -100,7 +103,8 @@ class CreateQRActivity : BaseActivity() {
         qrCodeViewModel.createPayQrWithMessage.observe(this, Observer { it1 ->
             it1?.let {
                 if (!it.first.isNullOrEmpty() && it.second != null) {
-                    loadImage(it.second?.qrCode!!, image_view_qr_code)
+                    binding.txtQrSuccessMsg.visibility = View.VISIBLE
+                    loadImage(it.second?.qrCode!!, binding.imageViewQrCode)
                 }
             }
         })
@@ -122,7 +126,7 @@ class CreateQRActivity : BaseActivity() {
 
         userTokenModel.isTokenRefresh.observe(this, Observer { isTokenRefresh ->
             if (isTokenRefresh) {
-                qrCodeViewModel.subscribeCreatePayQr(text_input_amount.text.toString())
+                qrCodeViewModel.subscribeCreatePayQr(binding.textInputAmount.text.toString())
             }
         })
 

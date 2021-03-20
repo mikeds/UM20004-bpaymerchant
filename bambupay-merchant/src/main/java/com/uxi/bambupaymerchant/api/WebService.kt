@@ -1,5 +1,6 @@
 package com.uxi.bambupaymerchant.api
 
+import com.uxi.bambupaymerchant.lookup.TxDetails
 import com.uxi.bambupaymerchant.model.*
 import com.uxi.bambupaymerchant.model.paynamics.Paynamics
 import io.reactivex.Flowable
@@ -47,5 +48,8 @@ interface WebService {
 
     @POST("transactions/merchant/top-up")
     fun cashInPaynamics(@Body params: Request): Flowable<GenericApiResponse<Paynamics>>
+
+    @GET("lookup/merchant/tx/{refIdNumber}")
+    fun getTxDetails(@Path("refIdNumber") refIdNumber: String): Flowable<GenericApiResponse<TxDetails>>
 
 }

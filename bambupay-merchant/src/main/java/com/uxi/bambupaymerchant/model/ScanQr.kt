@@ -15,6 +15,10 @@ class ScanQr : Serializable {
     @SerializedName("qr_code")
     var qrCode: String? = null
 
+    var amount: String? = null
+
+    var fee: String? = null
+
     var timestamp: String? = null
 
 }
