@@ -83,6 +83,7 @@ class ScanPayQrCodeActivity : BaseActivity() {
                     Timber.tag("DEBUG").e("dataItem:: $dataItem")
                     if (!dataItem.isNullOrEmpty()) {
                         binding.contentScanPay.textInputRefNum.setText(dataItem)
+                        qrCodeViewModel.subscribeTxDetails(dataItem)
                     }
                 }
             }
