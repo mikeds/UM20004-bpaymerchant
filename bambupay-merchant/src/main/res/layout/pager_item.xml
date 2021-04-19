@@ -33,6 +33,7 @@
         android:gravity="center"
         android:lineSpacingExtra="6dp"
         android:text="@string/page_demo"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
 </LinearLayout>
