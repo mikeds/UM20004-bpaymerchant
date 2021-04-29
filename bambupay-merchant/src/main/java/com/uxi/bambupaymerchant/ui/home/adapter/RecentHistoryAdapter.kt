@@ -63,11 +63,11 @@ class RecentHistoryAdapter(private val activity: FragmentActivity?,
                             itemView.txt_amount.setTextColor((ContextCompat.getColor(it1, R.color.light_green)))
                         }
                     }
-                    CASH_OUT -> itemView.txt_transaction_type.text = activity?.getString(R.string.cash_out)
+                    /*CASH_OUT -> itemView.txt_transaction_type.text = activity?.getString(R.string.cash_out)
                     SCAN_PAY_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.scan_pay)
                     CREATE_SCAN_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.create_scan_qr)
                     QUICK_PAY_QR -> itemView.txt_transaction_type.text = activity?.getString(R.string.quick_qr)
-                    INCOME_SHARES -> itemView.txt_transaction_type.text = activity?.getString(R.string.income_shares)
+                    INCOME_SHARES -> itemView.txt_transaction_type.text = activity?.getString(R.string.income_shares)*/
                     else -> {itemView.txt_transaction_type.text = it.transactionType}
                 }
                 val transactionAmount = it.amount?.let { it1 -> utils?.currencyFormat(it1) }
